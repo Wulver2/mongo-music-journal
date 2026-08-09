@@ -7,7 +7,21 @@ const app = express()
 
 //get
 // get songs, artist with list of songs and albums, genres also shows related artists,
-// albums with list of songs from album, get a song (with lyrics?)
+// album with list of songs from album, get a song (with lyrics?)
+
+app.get("/songs{/song_title}}", (req, res) => {
+
+});
+
+app.get("/artist", (req, res) => {
+
+});
+
+app.get("/album", (req, res) => {
+
+});
+
+
 
 // update
 // can update rating of a song/album
