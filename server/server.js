@@ -15,7 +15,7 @@ app.post("/favorites/artist", (req, res) => {
 // get songs, artist with list of songs and albums, genres also shows related artists,
 // album with list of songs from album, get a song (with lyrics?)
 
-app.get("/songs{/:song_title}}", (req, res) => {
+app.get("/songs{/:song_title}", (req, res) => {
 
 });
 
@@ -31,20 +31,21 @@ app.get("/album", (req, res) => {
 
 // update
 // can update rating of a song/album
-res.put("/rating", (req, res) => {
+app.put("/rating", (req, res) => {
 
 });
 
 // delete
 // remove artists/songs from favorites
-res.delete("/favorites/:artist", (req, res) => {
+app.delete("/favorites/:artist", (req, res) => {
 
 });
 
-res.delete("/favorites/:song", (req, res) => {
+app.delete("/favorites/:song", (req, res) => {
 
 });
 
 app.listen(5001, () => {
     console.log("Server on")
 });
+
