@@ -1,6 +1,9 @@
-import express from "express"
+import express from "express";
+import { connectDB } from "./db.js";
 
 const app = express()
+
+connectDB();
 // Routes for music
 //create
 // add favorite songs/artists
