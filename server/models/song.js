@@ -20,3 +20,7 @@ const songSchema = new mongoose.Schema({
         type: String
     }
 });
+
+const Song = mongoose.model("Song", songSchema);
+
+export default Song;
