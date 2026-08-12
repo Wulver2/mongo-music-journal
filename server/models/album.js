@@ -6,11 +6,13 @@ const albumSchema = new mongoose.Schema({
         required: true
     },
     artist: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Artist",
         required: true
     },
     coverURL: {type: String},
-    releaseDate: {type: Date}
+    releaseDate: {type: Date},
+    tags: {type: [String]}
 });
 
 const album = mongoose.model("Album", albumSchema);
