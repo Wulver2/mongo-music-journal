@@ -3,7 +3,7 @@ import { connectDB } from "./db.js";
 
 const app = express()
 
-connectDB();
+await connectDB();
 // Routes for music
 //create
 // add favorite songs/artists
