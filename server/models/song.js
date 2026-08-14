@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 // may add rating 
+// could add release date
 const songSchema = new mongoose.Schema({
     title: {
         type: String,
