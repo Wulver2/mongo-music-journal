@@ -15,6 +15,6 @@ const albumSchema = new mongoose.Schema({
     tags: {type: [String]}
 });
 
-const album = mongoose.model("Album", albumSchema);
+const Album = mongoose.model("Album", albumSchema);
 
-export default album;
+export default Album;

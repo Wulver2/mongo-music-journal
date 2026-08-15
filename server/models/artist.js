@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const artistSchema = mongoose.Schema({
+const artistSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -10,6 +10,6 @@ const artistSchema = mongoose.Schema({
     tags: {type: [String]}
 });
 
-const artist = mongoose.model("Artist", artistSchema);
+const Artist = mongoose.model("Artist", artistSchema);
 
-export default artist;
+export default Artist;
