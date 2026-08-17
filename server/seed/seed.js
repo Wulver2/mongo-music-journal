@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import { connectDB } from "../db";
-import Artist from "../models/artist";
-import Album from "../models/album";
-import Song from "../models/song";
-import musicData from "./data";
+import { connectDB } from "../db.js";
+import Artist from "../models/artist.js";
+import Album from "../models/album.js";
+import Song from "../models/song.js";
+import musicData from "./data.js";
 import { json } from "express";
 
 
 const seedDB = async () => {
-    connectDB();
+    await connectDB();
 
 
     await Song.deleteMany();
@@ -17,22 +17,22 @@ const seedDB = async () => {
 
     // Insert artist and album data first, so that
     // album and songs can use there ids to refrence them
-    for (var i = 0; i < musicData.length(); i++) {
+    for (var i = 0; i < musicData.length; i++) {
         const artist = await Artist.insertOne({
             name: musicData[i].name,
             tags: musicData[i].tags
         })
 
-        for (var i = 0; i < musicData.albums.length(); i++) {
+        for (var j = 0; j < musicData[i].albums.length; j++) {
             const album = await Album.insertOne({
-                title: musicData.albums[i].title,
-                releaseDate: musicData.albums[i].releaseDate,
+                title: musicData[i].albums[j].title,
+                releaseDate: musicData[i].albums[j].releaseDate,
                 artist: artist
             });
 
-            for (var j = 0; j < musicData.albums[i].songs.length(); j++) {
+            for (var k = 0; k < musicData[i].albums[j].songs.length; k++) {
                 await Song.insertOne({
-                    name: musicData.albums[i].songs[j].name,
+                    title: musicData[i].albums[j].songs[k].name,
                     artist: artist,
                     album: album
                 });
@@ -42,3 +42,5 @@ const seedDB = async () => {
     }
 
 }
+
+seedDB()

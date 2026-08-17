@@ -42,4 +42,4 @@ const musicData = [
     }
 ]
 
-module.exports = musicData;
+export default musicData;
