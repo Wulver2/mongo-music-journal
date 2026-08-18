@@ -1,5 +1,9 @@
 import express from "express";
 import { connectDB } from "./db.js";
+import Artist from "./models/artist.js";
+import Album from "./models/album.js";
+import Song from "./models/song.js";
+
 
 const app = express()
 
@@ -18,8 +22,22 @@ app.post("/favorites/artist", (req, res) => {
 // get songs, artist with list of songs and albums, genres also shows related artists,
 // album with list of songs from album, get a song (with lyrics?)
 
-app.get("/songs{/:song_title}", (req, res) => {
+app.get("/songs{/:song_title}", async (req, res) => {
+    try {
+        const { song_title } = req.params;
+        console.log(song_title);
+        let song;
 
+        if (!song_title) {
+            song = await Song.find();
+        }
+        else {
+            song = await Song.find({title: song_title});
+        }
+        res.json(song);
+    } catch (error) {
+        console.error(error.message);
+    }
 });
 
 app.get("/artist", (req, res) => {
