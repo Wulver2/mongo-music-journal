@@ -40,12 +40,40 @@ app.get("/songs{/:song_title}", async (req, res) => {
     }
 });
 
-app.get("/artist", (req, res) => {
+app.get("/artist{/:artist_name}", async (req, res) => {
+    try {
+        const { artist_name } = req.params;
+        let artist;
 
+        if (!artist_name) {
+            artist = await Artist.find();
+        }
+        else {
+            artist = await Artist.find({name: artist_name});
+        }
+
+        res.json(artist);
+    } catch (error) {
+        console.error(error.message);
+    }
 });
 
-app.get("/album", (req, res) => {
+app.get("/album{/:album_name}", async (req, res) => {
+    try {
+        const { album_name } = req.params;
+        let album;
 
+        if (!album_name) {
+            album = await Album.find();
+        }
+        else {
+            album = await Album.find({name: album_name});
+        }
+
+        res.json(album);
+    } catch (error) {
+        console.error(error.message);
+    }
 });
 
 
