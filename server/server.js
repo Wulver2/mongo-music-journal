@@ -11,11 +11,11 @@ await connectDB();
 // Routes for music
 //create
 // add favorite songs/artists
-app.post("/favorites/song", (req, res) => {
+app.post("/favorites/:song", (req, res) => {
     const {song} = req.body
 })
 
-app.post("/favorites/artist", (req, res) => {
+app.post("/favorites/:artist", (req, res) => {
     const { artist } = req.body
 })
 //get
