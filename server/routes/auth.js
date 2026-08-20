@@ -73,3 +73,5 @@ router.post('/logout', async (req, res) => {
         console.error(error.message);
     }
 });
+
+module.exports = {router}
