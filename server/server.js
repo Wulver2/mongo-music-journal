@@ -25,7 +25,6 @@ app.post("/favorites/:artist", (req, res) => {
 app.get("/songs{/:song_title}", async (req, res) => {
     try {
         const { song_title } = req.params;
-        console.log(song_title);
         let song;
 
         if (!song_title) {
