@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import playlist from "./playlists";
+import Album from "./album";
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -13,7 +15,23 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profilePicUrl: {type: String}
+    profilePicUrl: { type: String },
+    favoriteSongs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Song"
+    }],
+    favoriteArtists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Artist"
+    }],
+    favoriteAlbums: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Album"
+    }],
+    createdPlaylists: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Playlist"
+    }]
 })
 
 const User = mongoose.model("User", userSchema);
