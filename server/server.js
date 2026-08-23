@@ -12,7 +12,7 @@ await connectDB();
 //create
 // add favorite songs/artists
 app.post("/favorites/:song", (req, res) => {
-    const {song} = req.body
+    const { song } = req.body
 })
 
 app.post("/favorites/:artist", (req, res) => {
