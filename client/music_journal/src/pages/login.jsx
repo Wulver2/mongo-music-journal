@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router";
 
 export function Login() {
     const [form, setForm] = useState({
@@ -14,7 +15,7 @@ export function Login() {
         <>
             <h1>login</h1>
             <form className="
-            fixed flex flex-col left-2/5 outline-solid rounded-sm shadow-2xl
+            fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
             bg-gray-900 text-white p-8 gap-2
             ">
                 <label htmlFor="email"> Email: </label>
@@ -31,7 +32,8 @@ export function Login() {
                         (e) => {
                             setForm({ ...form, password: e.target.value })
                         }} />
-                <button type="submit" className="pl-24  pr-24 bg-green-600 self-center rounded-sm hover:bg-green-700">Log in</button>
+                <button type="submit" className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700">Log in</button>
+                <p>Don't have an account? <Link to="/register" className="underline text-blue-400">sign up now</Link></p>
             </form>
         </>
     )
