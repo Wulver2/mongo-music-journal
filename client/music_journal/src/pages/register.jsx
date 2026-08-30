@@ -8,6 +8,12 @@ export function Register() {
         password: ""
     });
 
+    const comparePw = (val) => {
+        if (val == form.password) {
+            return true 
+        }
+        return false
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
     }
@@ -40,7 +46,7 @@ export function Register() {
                             setForm({ ...form, password: e.target.value })
                         }} />
                 <label htmlFor="confirmPassword"> Confirm password: </label>
-                <input type="confirmPassword" id="confirmPassword"
+                <input type="password" id="confirmPassword"
                     className="outline-solid rounded-sm outline-gray-5" />
                 <button type="submit" className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>
                 <p>Have an account already? <Link to="/login" className="underline text-blue-400">Log in</Link></p>
