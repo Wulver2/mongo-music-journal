@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import playlist from "./playlists";
-import Album from "./album";
 
 const userSchema = new mongoose.Schema({
     username: {

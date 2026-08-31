@@ -1,4 +1,3 @@
-import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 
 const playlistSchema = new mongoose.Schema({
@@ -8,6 +7,6 @@ const playlistSchema = new mongoose.Schema({
     }]
 });
 
-const playlist = mongoose.model("Playlist", playlistSchema);
+const Playlist = mongoose.model("Playlist", playlistSchema);
 
-export default playlist;
+export default Playlist;

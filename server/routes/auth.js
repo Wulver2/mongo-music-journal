@@ -1,10 +1,11 @@
 import express from "express";
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import User from "../models/user";
-import { jwt } from "jsonwebtoken";
+import User from "../models/user.js";
+import jwt from "jsonwebtoken";
 
-const router = express.router;
+export const router = express.Router("express");
+
 //must have a unique username
 router.post('/login', async (req, res) => {
     try {
@@ -74,4 +75,4 @@ router.post('/logout', async (req, res) => {
     }
 });
 
-module.exports = {router}
+export default router
