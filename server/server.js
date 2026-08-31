@@ -3,9 +3,11 @@ import { connectDB } from "./db.js";
 import Artist from "./models/artist.js";
 import Album from "./models/album.js";
 import Song from "./models/song.js";
+import {router as authRouter} from "./routes/auth.js"
 
 
 const app = express()
+app.use('/auth', authRouter);
 
 await connectDB();
 // Routes for music
