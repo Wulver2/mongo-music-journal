@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-import { Link } from "react-router";
+import { Link, useNavigate as navigate } from "react-router";
 
 export function Login() {
     const [form, setForm] = useState({
@@ -10,18 +10,20 @@ export function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+            const userInfo = await axios.post("/auth/login", form);
+            // later set user
+            navigate("/");
         try {
-            
+
         } catch (error) {
-            
+
         }
     }
 
     return (
         <>
             <h1>login</h1>
-            <form className="
+            <form onSubmit={handleSubmit} className="
             fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
             bg-gray-900 text-white p-8 gap-2
             ">

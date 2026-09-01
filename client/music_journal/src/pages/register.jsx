@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { Link } from "react-router";
+import { Link, useNavigate as navigate } from "react-router";
+
 
 export function Register() {
     const [form, setForm] = useState({
@@ -16,13 +17,21 @@ export function Register() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
+        try {
+            const userInfo = await axios.post("/auth/register", form);
+            // later set user
+            navigate("/");
+        } catch (error) {
+            console.error(error.message);
+        }
+
     }
 
     return (
         <>
             <h1>login</h1>
-            <form className="fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
+            <form onSubmit={handleSubmit} className="fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
             bg-gray-900 text-white p-8 gap-2">
                 <label htmlFor="email"> Email: </label>
                 <input type="email" id="email"
