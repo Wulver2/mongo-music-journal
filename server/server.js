@@ -4,10 +4,14 @@ import Artist from "./models/artist.js";
 import Album from "./models/album.js";
 import Song from "./models/song.js";
 import {router as authRouter} from "./routes/auth.js"
+import verifyToken from "./middleware/verifyToken.js";
+import cookieParser from "cookie-parser";
 
 
 const app = express()
 app.use('/auth', authRouter);
+// needed to get request cookies when verifying token
+app.use(cookieParser())
 
 await connectDB();
 // Routes for music
