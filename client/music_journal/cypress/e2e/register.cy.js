@@ -1,11 +1,16 @@
+/// <reference types="Cypress" />
+
 describe('Registration', () => {
-  it('passes', () => {
+  beforeEach( () => {
     cy.visit('http://localhost:5173/register');
-  })
+  });
   // one test for sucessful login (goes to dash board)
   // one for incorrect confirm password
-  //email
-  //username
-  //password
-  //confirm password
+  it("user enters incorrect confirm password", () => {
+    //email
+    cy.get("#email").type("test@example.com");
+    cy.get("#username").type("test@example.com");
+    cy.get("#password").type("password123");
+    cy.get("#confirmPassword").type("123password");
+  })
 })

@@ -9,6 +9,8 @@ export function Register() {
         password: ""
     });
 
+    const [isMatch, setIsMatch] = useState(true);
+
     const comparePw = (val) => {
         if (val == form.password) {
             return true 
@@ -19,9 +21,15 @@ export function Register() {
         e.preventDefault();
 
         try {
-            const userInfo = await axios.post("/auth/register", form);
-            // later set user
-            navigate("/");
+            if (comparePw(document.getElementById(confirmPassword))) {
+                const userInfo = await axios.post("/auth/register", form);
+                // later set user
+                setIsMatch(true)
+                navigate("/");
+            }
+            else {
+                setIsMatch(false)
+            }
         } catch (error) {
             console.error(error.message);
         }
@@ -31,7 +39,7 @@ export function Register() {
     return (
         <>
             <h1>login</h1>
-            <form onSubmit={handleSubmit} className="fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
+            <form className="fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
             bg-gray-900 text-white p-8 gap-2">
                 <label htmlFor="email"> Email: </label>
                 <input type="email" id="email"
@@ -50,15 +58,16 @@ export function Register() {
                     } />
                 <label htmlFor="password"> Password: </label>
                 <input type="password" id="password"
-                    className="outline-solid rounded-sm outline-gray-5"
+                    className={`outline-solid rounded-sm ${isMatch ? 'outline-gray-300' : 'outline-red-600 text-red-600'}`}
                     onChange={
                         (e) => {
                             setForm({ ...form, password: e.target.value })
                         }} />
                 <label htmlFor="confirmPassword"> Confirm password: </label>
                 <input type="password" id="confirmPassword"
-                    className="outline-solid rounded-sm outline-gray-5" />
-                <button type="submit" className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>
+                    className={`outline-solid rounded-sm ${isMatch ? 'outline-gray-300' : 'outline-red-600 text-red-600'}`} />
+                <button type="submit" onClick={handleSubmit} className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>
+                {!isMatch && <p className="text-red-600">Passwords do not match</p>}
                 <p>Have an account already? <Link to="/login" className="underline text-blue-400">Log in</Link></p>
             </form>
         </>
