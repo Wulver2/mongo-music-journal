@@ -12,5 +12,8 @@ describe('Registration', () => {
     cy.get("#username").type("test@example.com");
     cy.get("#password").type("password123");
     cy.get("#confirmPassword").type("123password");
+    cy.get('#regiButton').click()
+    cy.url().should('eq','http://localhost:5173/register')
+    cy.get("#matchError").should('contain', "Passwords do not match");
   })
 })

@@ -66,8 +66,8 @@ export function Register() {
                 <label htmlFor="confirmPassword"> Confirm password: </label>
                 <input type="password" id="confirmPassword"
                     className={`outline-solid rounded-sm ${isMatch ? 'outline-gray-300' : 'outline-red-600 text-red-600'}`} />
-                <button type="submit" onClick={handleSubmit} className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>
-                {!isMatch && <p className="text-red-600">Passwords do not match</p>}
+                <button id="regiButton" type="submit" onClick={handleSubmit} className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>
+                {!isMatch && <p id="matchError" className="text-red-600">Passwords do not match</p>}
                 <p>Have an account already? <Link to="/login" className="underline text-blue-400">Log in</Link></p>
             </form>
         </>
