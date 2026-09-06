@@ -6,4 +6,9 @@ describe("login tests", () => {
     });
     // successful login goes to homepage/dashboard
     // unsuccessful login 
+    it("Wrong email", () => {
+        cy.get("#email").type("wrongemail@example.com");
+        cy.get("#password").type("password");
+        cy.get("#error").should('contain', "email does not exist") 
+    })
 })
