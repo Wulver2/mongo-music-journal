@@ -10,13 +10,12 @@ export function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
             const userInfo = await axios.post("/auth/login", form);
             // later set user
             navigate("/");
-        try {
-
         } catch (error) {
-
+            console.error(error.message);
         }
     }
 

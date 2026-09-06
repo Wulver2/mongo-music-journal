@@ -19,4 +19,13 @@ describe("login tests", () => {
         cy.get("form button").click();
         cy.get("#error").should("contain", "Incorrect password. Please try again.");
     })
+
+    it("Successful login", () => {
+        cy.get("#email").type("test@example.com");
+        cy.get("#password").type("password");
+        cy.get("form button").click();
+        cy.url().should('eq', "http://localhost:5173/");
+        // should say welcome back, username
+        //cy.get("h1").should('contain', "welcome back, ");
+    })
 })
