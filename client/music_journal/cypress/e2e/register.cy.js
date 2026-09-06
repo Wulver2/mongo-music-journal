@@ -8,8 +8,8 @@ describe('Registration', () => {
     // one for incorrect confirm password
     it("user enters incorrect confirm password", () => {
         //email
-        cy.get("#email").type("test@example.com");
-        cy.get("#username").type("test@example.com");
+        cy.get("#email").type("register@example.com");
+        cy.get("#username").type("registerTest");
         cy.get("#password").type("password123");
         cy.get("#confirmPassword").type("123password");
         cy.get('#regiButton').click()
@@ -17,8 +17,8 @@ describe('Registration', () => {
         cy.get("#matchError").should('contain', "Passwords do not match");
     })
     it("user successfully registers", () => {
-        cy.get("#email").type("test@example.com");
-        cy.get("#username").type("test@example.com");
+        cy.get("#email").type("register@example.com");
+        cy.get("#username").type("registerTest");
         cy.get("#password").type("password123");
         cy.get("#confirmPassword").type("password123");
         //cy.get('#regiButton').click()

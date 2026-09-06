@@ -9,6 +9,14 @@ describe("login tests", () => {
     it("Wrong email", () => {
         cy.get("#email").type("wrongemail@example.com");
         cy.get("#password").type("password");
-        cy.get("#error").should('contain', "email does not exist") 
+        cy.get("form button").click();
+        cy.get("#error").should('contain', "email does not exist")
+    })
+
+    it("Wrong password", () => {
+        cy.get("#email").type("test@example.com");
+        cy.get("#password").type("wrongPassword");
+        cy.get("form button").click();
+        cy.get("#error").should("contain", "Incorrect password. Please try again.");
     })
 })
