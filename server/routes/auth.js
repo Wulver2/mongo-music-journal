@@ -75,4 +75,17 @@ router.post('/logout', async (req, res) => {
     }
 });
 
+router.delete('/deleteAcc', async (req, res) => {
+    try {
+        const {user_email} = req.body;
+        const userInfo = await User.findOne({ email : user_email});
+        await userInfo.deleteOne()
+        const deleted = User.findById(userInfo)
+        // should be null
+        res.json({message : `Previous user is now ${deleted}`})
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
 export default router
