@@ -4,26 +4,19 @@ import Artist from "./models/artist.js";
 import Album from "./models/album.js";
 import Song from "./models/song.js";
 import {router as authRouter} from "./routes/auth.js"
-import verifyToken from "./middleware/verifyToken.js";
+import {router as favoritesRouter} from "./routes/favorites.js"
 import cookieParser from "cookie-parser";
 
 
 const app = express()
 app.use('/auth', authRouter);
+app.use('/favorites', favoritesRouter);
 // needed to get request cookies when verifying token
 app.use(cookieParser())
 
 await connectDB();
 // Routes for music
 //create
-// add favorite songs/artists
-app.post("/favorites/:song", (req, res) => {
-    const { song } = req.body
-})
-
-app.post("/favorites/:artist", (req, res) => {
-    const { artist } = req.body
-})
 //get
 // get songs, artist with list of songs and albums, genres also shows related artists,
 // album with list of songs from album, get a song (with lyrics?)
@@ -89,15 +82,6 @@ app.put("/rating", (req, res) => {
 
 });
 
-// delete
-// remove artists/songs from favorites
-app.delete("/favorites/:artist", (req, res) => {
-
-});
-
-app.delete("/favorites/:song", (req, res) => {
-
-});
 
 app.listen(5001, () => {
     console.log("Server on")
