@@ -33,11 +33,11 @@ router.post('/login', async (req, res) => {
                 res.status(200).json(userInfo[0]);
             }
             else {
-                res.status(401).json({ message: "incorrect username or password" });
+                res.status(401).json({ message: "incorrect email or password" });
             }
         }
         else {
-            res.status(401).json({ message: "incorrect username or password" });
+            res.status(401).json({ message: "incorrect email or password" });
         }
 
 
@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
         const { email, username, password } = req.body;
 
         const hashedPassword = await bcrypt.hash(password, 10);
-
+        //email and username should be unique
         await User.create({ email: email, username: username, password: hashedPassword });
         // token and cookie (will make it a function for less code duplication)
         res.status(200).json({ message: "inserted user data" });
