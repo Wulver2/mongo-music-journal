@@ -58,10 +58,13 @@ router.get("/songs", verifyToken, async (req, res) => {
     try {
         const { email } = req.body;
         const user = await User.findOne({ email: email });
+        const songs = []
 
-        for (var i = 0; i < length(user.favoriteSongs); i++) {
+        user.favoriteSongs.forEach(songId => {
+            songs.push(Song.findById(songId));
+        });
 
-        }
+        res.status(200).json(songs)
     } catch (error) {
         console.error(error.message)
     }
