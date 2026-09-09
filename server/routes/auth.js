@@ -52,9 +52,19 @@ router.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         //email and username should be unique
-        await User.create({ email: email, username: username, password: hashedPassword });
-        // token and cookie (will make it a function for less code duplication)
-        res.status(200).json({ message: "inserted user data" });
+        const emailExist = await User.exists({ email: email });
+        const usernameExist = await User.exists({ username: username });
+        if (emailExist) {
+            res.json({ message: "email already in use" });
+        }
+        else if (usernameExist) {
+            res.json({ message: "username already in use" })
+        }
+        else {
+            await User.create({ email: email, username: username, password: hashedPassword });
+            // token and cookie (will make it a function for less code duplication)
+            res.status(201).json({ message: "inserted user data" });
+        }
     } catch (error) {
         console.error(error.message);
     }
@@ -77,12 +87,12 @@ router.post('/logout', async (req, res) => {
 
 router.delete('/deleteAcc', async (req, res) => {
     try {
-        const {user_email} = req.body;
-        const userInfo = await User.findOne({ email : user_email});
+        const { user_email } = req.body;
+        const userInfo = await User.findOne({ email: user_email });
         await userInfo.deleteOne()
         const deleted = User.findById(userInfo)
         // should be null
-        res.json({message : `Previous user is now ${deleted}`})
+        res.json({ message: `Previous user is now ${deleted}` })
     } catch (error) {
         console.error(error.message)
     }
