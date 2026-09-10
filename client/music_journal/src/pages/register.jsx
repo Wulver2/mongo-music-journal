@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate as navigate } from "react-router";
+import axios from "axios";
 
 
 export function Register() {
@@ -23,7 +24,7 @@ export function Register() {
 
         try {
             if (comparePw(form.confirmPw)) {
-                const userInfo = await axios.post("/auth/register", form);
+                const userInfo = await axios.post("http://localhost/5001/auth/register", form);
                 // later set user
                 setIsMatch(true)
                 navigate("/");
@@ -43,14 +44,14 @@ export function Register() {
             <form className="fixed flex flex-col left-2/5 outline-solid outline-gray-900 rounded-sm shadow-2xl
             bg-gray-900 text-white p-8 gap-2">
                 <label htmlFor="email"> Email: </label>
-                <input type="email" id="email"
+                <input required type="email" id="email"
                     className="outline-solid rounded-sm outline-gray-5"
                     onChange={
                         (e) => {
                             setForm({ ...form, email: e.target.value })
                         }} />
                 <label htmlFor="username"> Username: </label>
-                <input type="text" name="username" id="username"
+                <input required type="text" name="username" id="username"
                     className="outline-solid rounded-sm outline-gray-5"
                     onChange={
                         (e) => {
@@ -58,14 +59,14 @@ export function Register() {
                         }
                     } />
                 <label htmlFor="password"> Password: </label>
-                <input type="password" id="password"
+                <input required type="password" id="password"
                     className={`outline-solid rounded-sm ${isMatch ? 'outline-gray-300' : 'outline-red-600 text-red-600'}`}
                     onChange={
                         (e) => {
                             setForm({ ...form, password: e.target.value })
                         }} />
                 <label htmlFor="confirmPassword"> Confirm password: </label>
-                <input type="password" id="confirmPassword"
+                <input required type="password" id="confirmPassword"
                     className={`outline-solid rounded-sm ${isMatch ? 'outline-gray-300' : 'outline-red-600 text-red-600'}`} 
                     onChange={(e) => {setForm({...form, confirmPw: e.target.value})}}/>
                 <button id="regiButton" type="submit" onClick={handleSubmit} className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700"> Register</button>

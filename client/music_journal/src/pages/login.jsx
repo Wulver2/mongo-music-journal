@@ -11,7 +11,7 @@ export function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userInfo = await axios.post("/auth/login", form);
+            const userInfo = await axios.post("http://localhost/5001/auth/login", form);
             // later set user
             navigate("/");
         } catch (error) {
