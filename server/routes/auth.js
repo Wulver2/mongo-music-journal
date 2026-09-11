@@ -61,8 +61,23 @@ router.post('/register', async (req, res) => {
             res.json({ message: "username already in use" })
         }
         else {
-            await User.create({ email: email, username: username, password: hashedPassword });
+            const userInfo = await User.create({ email: email, username: username, password: hashedPassword });
             // token and cookie (will make it a function for less code duplication)
+            const sessionToken = jwt.sign(
+                userInfo[0].id,
+                process.env.JWT_SECRET,
+                { expiresIn: "7d" }
+            );
+            res.cookie(
+                "sessionToken",
+                sessionToken,
+                {
+                    expires: new Date(Date.now + 100 * 60 * 60 * 24 * 7),
+                    httpOnly: True,
+                    secure: process.env.NODE_ENV === 'production',
+                    sameSite: 'strict'
+                }
+            );
             res.status(201).json({ message: "inserted user data" });
         }
     } catch (error) {

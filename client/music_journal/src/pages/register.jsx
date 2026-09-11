@@ -24,7 +24,7 @@ export function Register() {
 
         try {
             if (comparePw(form.confirmPw)) {
-                const userInfo = await axios.post("http://localhost/5001/auth/register", form);
+                const userInfo = await axios.post("http://localhost:5001/auth/register", form);
                 // later set user
                 setIsMatch(true)
                 navigate("/");

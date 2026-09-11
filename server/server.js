@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 import { connectDB } from "./db.js";
 import Artist from "./models/artist.js";
 import Album from "./models/album.js";
@@ -8,11 +9,17 @@ import {router as favoritesRouter} from "./routes/favorites.js"
 import cookieParser from "cookie-parser";
 
 
-const app = express()
+const app = express();
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+app.use(cookieParser());
+app.use(express.json());
+
 app.use('/auth', authRouter);
 app.use('/favorites', favoritesRouter);
 // needed to get request cookies when verifying token
-app.use(cookieParser())
 
 await connectDB();
 // Routes for music
