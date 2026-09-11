@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { Link, useNavigate as navigate } from "react-router";
+import { Link, useNavigate} from "react-router";
 import axios from "axios";
 
 
 export function Register() {
+    const navigate = useNavigate();
+    
     const [form, setForm] = useState({
         email: "",
         username: "",

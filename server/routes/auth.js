@@ -64,7 +64,7 @@ router.post('/register', async (req, res) => {
             const userInfo = await User.create({ email: email, username: username, password: hashedPassword });
             // token and cookie (will make it a function for less code duplication)
             const sessionToken = jwt.sign(
-                userInfo[0].id,
+                userInfo.id,
                 process.env.JWT_SECRET,
                 { expiresIn: "7d" }
             );

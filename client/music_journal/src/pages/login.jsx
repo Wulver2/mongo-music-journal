@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react"
-import { Link, useNavigate as navigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export function Login() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         email: "",
         password: ""
