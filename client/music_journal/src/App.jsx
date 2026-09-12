@@ -5,6 +5,7 @@ import { Login } from './pages/login'
 import { Register } from './pages/register'
 import { Home } from './pages/home'
 import { Navbar } from './components/navbar'
+import { Settings } from './pages/settings'
 
 axios.defaults.withCredentials = true;
 
@@ -17,7 +18,9 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/Register' element={<Register />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/settings' element={<Settings/>}/>
+
           </Routes>
         </BrowserRouter>
       </div>
