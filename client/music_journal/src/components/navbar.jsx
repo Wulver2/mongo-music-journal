@@ -9,6 +9,7 @@ export function Navbar({ isLoggedIn = false }) {
                 <Link to="/login"> Login </Link>
                 <Link to="/register"> Register </Link>
                 <Link to="/settings"> Settings </Link>
+                <Link to="/songs"> Songs </Link>
                 <button className="bg-slate-900 hover:bg-slate-600">dark mode</button>
             </div>
         </>
