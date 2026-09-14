@@ -4,8 +4,8 @@ import { connectDB } from "./db.js";
 import Artist from "./models/artist.js";
 import Album from "./models/album.js";
 import Song from "./models/song.js";
-import {router as authRouter} from "./routes/auth.js"
-import {router as favoritesRouter} from "./routes/favorites.js"
+import { router as authRouter } from "./routes/auth.js"
+import { router as favoritesRouter } from "./routes/favorites.js"
 import cookieParser from "cookie-parser";
 
 
@@ -31,15 +31,28 @@ await connectDB();
 app.get("/songs{/:song_title}", async (req, res) => {
     try {
         const { song_title } = req.params;
-        let song;
-
+        let songs;
         if (!song_title) {
-            song = await Song.find();
+            songs = await Song.find();
+
+            const results = await Promise.all(
+                songs.map(async (song) => {
+                    const artist = await Artist.findById(song.artist);
+                    const album = await Album.findById(song.album);
+                    return {
+                        song,
+                        artist,
+                        album
+                    };
+                })
+            );
+            res.json(results)
         }
         else {
-            song = await Song.find({title: song_title});
+            // song artist/album 
+            songs = await Song.find({ title: song_title });
         }
-        res.json(song);
+        //res.json(songs);
     } catch (error) {
         console.error(error.message);
     }
@@ -54,7 +67,7 @@ app.get("/artist{/:artist_name}", async (req, res) => {
             artist = await Artist.find();
         }
         else {
-            artist = await Artist.find({name: artist_name});
+            artist = await Artist.find({ name: artist_name });
         }
 
         res.json(artist);
@@ -72,7 +85,7 @@ app.get("/album{/:album_name}", async (req, res) => {
             album = await Album.find();
         }
         else {
-            album = await Album.find({name: album_name});
+            album = await Album.find({ name: album_name });
         }
 
         res.json(album);
