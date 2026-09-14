@@ -20,10 +20,14 @@ export function Song() {
     return (
         <>
             <h1 className="text-white text-center">Songs</h1>
-            <div className="flex">
+            <div className="flex justify-items-center gap-3">
             {songs ?
                 songs.map(song => (
-                    <h2 className="text-white">{song.title}</h2>
+                    <div className="text-center flex flex-col">
+                    <h2 className="text-white">{song.song.title}</h2>
+                    <p className="text-white"> by {song.artist.name}</p>
+                    {song.album ? <p className="text-white"> On {song.album.title}</p> : null}
+                    </div>
                 ))
                 : <h2 className="text-white text-center">A problem has occured songs didn't load</h2>
             }
