@@ -13,6 +13,13 @@ export function Song() {
         }
     }
 
+    const favoriteASong = async () => {
+        try {
+            //limited to logged in users
+        } catch (error) {
+            
+        }
+    }
     useEffect(() => {
         getSongs();
     }, []);
@@ -24,6 +31,7 @@ export function Song() {
             {songs ?
                 songs.map(song => (
                     <div className="text-center flex flex-col">
+                    <button>Favorite</button>
                     <h2 className="text-white">{song.song.title}</h2>
                     <p className="text-white"> by {song.artist.name}</p>
                     {song.album ? <p className="text-white"> On {song.album.title}</p> : null}
