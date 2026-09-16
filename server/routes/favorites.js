@@ -8,7 +8,7 @@ import Artist from "../models/artist.js";
 export const router = express.Router("express");
 
 // add favorite songs/artists 
-// TODO:// prevent song, artists, etc from being added multiple times
+// TODO:// prevent song, artists, etc from being added multiple times, and change email to id
 router.post("/song", verifyToken, async (req, res) => {
     try {
         const { song, email } = req.body;

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react"
 import { Link, useNavigate } from "react-router";
+import { useContext } from "react"
+import { UserContext } from "../../context/userContext"
 
 export function Login() {
     const navigate = useNavigate();
@@ -14,6 +16,7 @@ export function Login() {
         try {
             const userInfo = await axios.post("http://localhost:5001/auth/login", form);
             // later set user
+            
             navigate("/");
         } catch (error) {
             console.error(error.message);

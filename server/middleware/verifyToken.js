@@ -10,13 +10,14 @@ export const verifyToken = (req, res, next) => {
                 // Frontend should send them back to login
             }
             else {
+                console.log(decoded)
+                res.json(decoded)
                 next()
             }
         })
     } catch (error) {
         console.log(error.message);
     }
-    next();
 }
 
 export default verifyToken;

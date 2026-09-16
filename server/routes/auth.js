@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import "dotenv/config";
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/verifyToken.js";
 
 export const router = express.Router("express");
 
@@ -13,10 +14,10 @@ router.post('/login', async (req, res) => {
         const userInfo = await User.findOne({ email: email });
 
         if (userInfo) {
-            const isMatch = await bcrypt.compare(password, userInfo[0].password);
+            const isMatch = await bcrypt.compare(password, userInfo.password);
             if (isMatch) {
                 const sessionToken = jwt.sign(
-                    {id: userInfo[0].id},
+                    {id: userInfo.id},
                     process.env.JWT_SECRET,
                     { expiresIn: "7d" }
                 );
@@ -30,7 +31,7 @@ router.post('/login', async (req, res) => {
                         sameSite: 'strict'
                     }
                 );
-                res.status(200).json(userInfo[0]);
+                res.status(200).json(userInfo);
             }
             else {
                 res.status(401).json({ message: "incorrect email or password" });
@@ -108,6 +109,15 @@ router.delete('/deleteAcc', async (req, res) => {
         const deleted = User.findById(userInfo)
         // should be null
         res.json({ message: `Previous user is now ${deleted}` })
+    } catch (error) {
+        console.error(error.message)
+    }
+})
+
+router.get('/me', async(req, res) => {
+    try {
+        await verifyToken()
+        console.log("it worked")
     } catch (error) {
         console.error(error.message)
     }
