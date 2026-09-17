@@ -6,6 +6,7 @@ import { UserContext } from "../../context/userContext"
 
 export function Login() {
     const navigate = useNavigate();
+    const {setUser} = useContext(UserContext);
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -16,7 +17,7 @@ export function Login() {
         try {
             const userInfo = await axios.post("http://localhost:5001/auth/login", form);
             // later set user
-            
+            setUser(userInfo.data)
             navigate("/");
         } catch (error) {
             console.error(error.message);

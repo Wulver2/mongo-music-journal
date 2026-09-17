@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate} from "react-router";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
 
 export function Register() {
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
     
     const [form, setForm] = useState({
         email: "",
@@ -29,6 +31,7 @@ export function Register() {
                 const userInfo = await axios.post("http://localhost:5001/auth/register", form);
                 // later set user
                 setIsMatch(true)
+
                 navigate("/");
             }
             else {

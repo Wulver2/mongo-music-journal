@@ -10,7 +10,7 @@ export const verifyToken = (req, res, next) => {
                 // Frontend should send them back to login
             }
             else {
-                res.json(decoded)
+                res.json(decoded.id)
                 next()
             }
         })

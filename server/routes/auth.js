@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
                         sameSite: 'strict'
                     }
                 );
-                res.status(200).json(userInfo);
+                res.status(200).json({id: userInfo.id, username: userInfo.username});
             }
             else {
                 res.status(401).json({ message: "incorrect email or password" });
@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
                     sameSite: 'strict'
                 }
             );
-            res.status(201).json({ message: "inserted user data" });
+            res.status(201).json({id: userInfo.id, username: userInfo.username});
         }
     } catch (error) {
         console.error(error.message);
@@ -122,8 +122,8 @@ router.get('/me', async (req, res) => {
                 res.status(401).json({ message: "Not a valid token" });
             }
             else {
-                console.log(decoded)
-                res.json(decoded)
+                console.log(decoded.username)
+                res.json({id: decoded.id, username: decoded.username})
             }
         })
     } catch (error) {
