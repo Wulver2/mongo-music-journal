@@ -17,7 +17,7 @@ router.post('/login', async (req, res) => {
             const isMatch = await bcrypt.compare(password, userInfo.password);
             if (isMatch) {
                 const sessionToken = jwt.sign(
-                    {id: userInfo.id},
+                    { id: userInfo.id,  username: userInfo.username},
                     process.env.JWT_SECRET,
                     { expiresIn: "7d" }
                 );
@@ -65,7 +65,7 @@ router.post('/register', async (req, res) => {
             const userInfo = await User.create({ email: email, username: username, password: hashedPassword });
             // token and cookie (will make it a function for less code duplication)
             const sessionToken = jwt.sign(
-                {id: userInfo.id},
+                { id: userInfo.id, username: userInfo.username },
                 process.env.JWT_SECRET,
                 { expiresIn: "7d" }
             );
@@ -114,10 +114,18 @@ router.delete('/deleteAcc', async (req, res) => {
     }
 })
 
-router.get('/me', async(req, res) => {
+router.get('/me', async (req, res) => {
     try {
-        await verifyToken()
-        console.log("it worked")
+        const sessionToken = req.cookies.sessionToken;
+        jwt.verify(sessionToken, process.env.JWT_SECRET, function (err, decoded) {
+            if (err) {
+                res.status(401).json({ message: "Not a valid token" });
+            }
+            else {
+                console.log(decoded)
+                res.json(decoded)
+            }
+        })
     } catch (error) {
         console.error(error.message)
     }

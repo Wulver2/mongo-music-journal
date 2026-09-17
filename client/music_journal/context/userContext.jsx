@@ -9,7 +9,7 @@ export function UserContextProvider({ children }) {
     useEffect(() => {
         if (!user) {
             //create route in backend to get user data
-            axios.get('/auth/me').then(({ data }) => {
+            axios.get('http://localhost:5001/auth/me').then(({ data }) => {
                 setUser(data);
                 console.log(user)
             })
