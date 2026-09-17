@@ -11,12 +11,11 @@ export function UserContextProvider({ children }) {
             //create route in backend to get user data
             axios.get('http://localhost:5001/auth/me').then(({ data }) => {
                 setUser(data);
-                console.log(user)
             })
         }
     }, [])
     return (
-        <UserContext.Provider value={[user, setUser]}>
+        <UserContext.Provider value={{user, setUser}}>
             {children}
         </UserContext.Provider>
     )

@@ -122,7 +122,6 @@ router.get('/me', async (req, res) => {
                 res.status(401).json({ message: "Not a valid token" });
             }
             else {
-                console.log(decoded.username)
                 res.json({id: decoded.id, username: decoded.username})
             }
         })
