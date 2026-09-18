@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { UserContext } from "../../context/userContext";
+import { Logout } from "./logout";
 
 
-export function Navbar({ isLoggedIn = false }) {
+export function Navbar() {
     const { user } = useContext(UserContext)
 
     return (
@@ -16,7 +17,7 @@ export function Navbar({ isLoggedIn = false }) {
                 <>
                 <Link to="/login"> Login </Link>
                 <Link to="/register"> Register </Link>
-                </> : null}
+                </> : <Logout></Logout>}
                 <button className="bg-slate-900 hover:bg-slate-600">dark mode</button>
             </div>
         </>
