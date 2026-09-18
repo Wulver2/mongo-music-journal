@@ -104,7 +104,7 @@ router.post('/logout', async (req, res) => {
 router.delete('/deleteAcc', async (req, res) => {
     try {
         const { id } = req.body;
-        const userInfo = await User.findById({ id });
+        const userInfo = await User.findById({_id: id });
         await userInfo.deleteOne();
 
         res.clearCookie("sessionToken", {
@@ -113,7 +113,7 @@ router.delete('/deleteAcc', async (req, res) => {
             sameSite: 'strict',
             expires: new Date(0)
         });
-        
+
         const deleted = User.findById(userInfo);
         // should be null
         res.json({ message: `Previous user is now ${deleted}` })
@@ -127,7 +127,7 @@ router.get('/me', async (req, res) => {
         const sessionToken = req.cookies.sessionToken;
         jwt.verify(sessionToken, process.env.JWT_SECRET, function (err, decoded) {
             if (err) {
-                res.status(401).json({ message: "Not a valid token" });
+                res.json({ message: "Not a valid token" });
             }
             else {
                 res.json({ id: decoded.id, username: decoded.username })
