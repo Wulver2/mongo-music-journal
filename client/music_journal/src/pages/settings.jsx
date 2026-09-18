@@ -1,11 +1,12 @@
 import { useContext } from "react"
 import { UserContext } from "../../context/userContext"
+import { DeleteAcc } from "../components/deleteAcc"
 
 export function Settings() {
     const { user } = useContext(UserContext)
     return (
-        <div>
-            {user ? <p>User logged in</p> : <p>Need to login in to use this feature</p>}
+        <div className="text-white ml-18">
+            {user ? <DeleteAcc></DeleteAcc> : <p>Need to login in to use this feature</p>}
         </div>
     )
 }
