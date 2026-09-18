@@ -5,12 +5,13 @@ import axios from "axios";
 
 
 export function DeleteAcc() {
-    const {setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+
     const navigate = useNavigate();
 
-    const handleDelete = () => {
+    const handleDelete = async() => {
         try {
-            axios.delete("http://localhost:5001/auth/deleteAcc");
+            await axios.delete("http://localhost:5001/auth/deleteAcc", {data: {id: user.id}});
             setUser(null)
             navigate("/");
         } catch (error) {
@@ -20,6 +21,6 @@ export function DeleteAcc() {
     // Add second check for deletion
 
     return (
-        <button className="bg-red-700">Delete Account</button>
+        <button className="bg-red-700" data-cy="deleteAcc" onClick={handleDelete}>Delete Account</button>
     )
 }

@@ -11,7 +11,7 @@ export function Navbar() {
         <>
             <div className="fixed top-0 h-screen w-16 m-0 flex flex-col bg-gray-800 shadow-lg text-white">
                 <Link to="/"> Home </Link>
-                <Link to="/settings"> Settings </Link>
+                <Link data-cy="settings" to="/settings"> Settings </Link>
                 <Link to="/songs"> Songs </Link>
                 {!user ?
                 <>

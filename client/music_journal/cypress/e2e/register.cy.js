@@ -23,6 +23,10 @@ describe('Registration', () => {
         cy.get("#confirmPassword").type("password123");
         cy.get('#regiButton').click()
         cy.url().should('eq', 'http://localhost:5173/')
+        cy.get('[data-cy="settings"]').click()
+        cy.url().should('eq', 'http://localhost:5173/settings')
+        cy.get('[data-cy="deleteAcc"]').click();
+        cy.url().should('eq', 'http://localhost:5173/')
     })
     // delete user so that test can be used again -> have to add delete user route
 })

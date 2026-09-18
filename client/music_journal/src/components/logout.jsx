@@ -7,9 +7,9 @@ export function Logout() {
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
 
-    const handleClick = () => {
+    const handleClick = async() => {
         try {
-            axios.post("http://localhost:5001/auth/logout");
+            await axios.post("http://localhost:5001/auth/logout");
             setUser(null)
             navigate("/");
         } catch (error) {
