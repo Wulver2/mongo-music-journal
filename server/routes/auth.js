@@ -17,7 +17,7 @@ router.post('/login', async (req, res) => {
             const isMatch = await bcrypt.compare(password, userInfo.password);
             if (isMatch) {
                 const sessionToken = jwt.sign(
-                    { id: userInfo.id,  username: userInfo.username},
+                    { id: userInfo.id, username: userInfo.username },
                     process.env.JWT_SECRET,
                     { expiresIn: "7d" }
                 );
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
                         sameSite: 'strict'
                     }
                 );
-                res.status(200).json({id: userInfo.id, username: userInfo.username});
+                res.status(200).json({ id: userInfo.id, username: userInfo.username });
             }
             else {
                 res.status(401).json({ message: "incorrect email or password" });
@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
                     sameSite: 'strict'
                 }
             );
-            res.status(201).json({id: userInfo.id, username: userInfo.username});
+            res.status(201).json({ id: userInfo.id, username: userInfo.username });
         }
     } catch (error) {
         console.error(error.message);
@@ -104,9 +104,17 @@ router.post('/logout', async (req, res) => {
 router.delete('/deleteAcc', async (req, res) => {
     try {
         const { id } = req.body;
-        const userInfo = await User.findById({id});
-        await userInfo.deleteOne()
-        const deleted = User.findById(userInfo)
+        const userInfo = await User.findById({ id });
+        await userInfo.deleteOne();
+
+        res.clearCookie("sessionToken", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            expires: new Date(0)
+        });
+        
+        const deleted = User.findById(userInfo);
         // should be null
         res.json({ message: `Previous user is now ${deleted}` })
     } catch (error) {
@@ -122,7 +130,7 @@ router.get('/me', async (req, res) => {
                 res.status(401).json({ message: "Not a valid token" });
             }
             else {
-                res.json({id: decoded.id, username: decoded.username})
+                res.json({ id: decoded.id, username: decoded.username })
             }
         })
     } catch (error) {
