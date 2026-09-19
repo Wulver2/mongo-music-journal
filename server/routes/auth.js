@@ -56,10 +56,10 @@ router.post('/register', async (req, res) => {
         const emailExist = await User.exists({ email: email });
         const usernameExist = await User.exists({ username: username });
         if (emailExist) {
-            res.json({ message: "email already in use" });
+            res.status(401).json({ message: "email already in use" });
         }
         else if (usernameExist) {
-            res.json({ message: "username already in use" })
+            res.status(401).json({ message: "username already in use" })
         }
         else {
             const userInfo = await User.create({ email: email, username: username, password: hashedPassword });
@@ -104,7 +104,8 @@ router.post('/logout', async (req, res) => {
 router.delete('/deleteAcc', async (req, res) => {
     try {
         const { id } = req.body;
-        const userInfo = await User.findById({_id: id });
+        console.log(id)
+        const userInfo = await User.findById({id});
         await userInfo.deleteOne();
 
         res.clearCookie("sessionToken", {
