@@ -11,7 +11,7 @@ export function DeleteAcc() {
 
     const handleDelete = async() => {
         try {
-            console.log(user)
+            
             await axios.delete("http://localhost:5001/auth/deleteAcc", {data: {id: user.id}});
             setUser(null)
             navigate("/");

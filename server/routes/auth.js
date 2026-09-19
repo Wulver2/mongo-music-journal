@@ -104,8 +104,8 @@ router.post('/logout', async (req, res) => {
 router.delete('/deleteAcc', async (req, res) => {
     try {
         const { id } = req.body;
-        console.log(id)
-        const userInfo = await User.findById({id});
+
+        const userInfo = await User.findById({_id: id});
         await userInfo.deleteOne();
 
         res.clearCookie("sessionToken", {
