@@ -7,6 +7,7 @@ import { Navbar } from './components/navbar'
 import { Settings } from './pages/settings'
 import { Song } from './pages/allSongs'
 import { UserContextProvider } from '../context/userContext'
+import { Favorites } from "./pages/favorites"
 
 axios.defaults.withCredentials = true;
 
@@ -23,6 +24,7 @@ function App() {
               <Route path='/register' element={<Register />} />
               <Route path='/settings' element={<Settings />} />
               <Route path='/songs' element={<Song />} />
+              <Route path='/favorites' element={<Favorites />} />
             </Routes>
           </BrowserRouter>
         </UserContextProvider>
