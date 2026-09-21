@@ -8,11 +8,11 @@ import Artist from "../models/artist.js";
 export const router = express.Router("express");
 
 // add favorite songs/artists 
-// TODO:// prevent song, artists, etc from being added multiple times, and change email to id
+// TODO:// prevent song, artists, etc from being added multiple times
 router.post("/song", verifyToken, async (req, res) => {
     try {
-        const { song, email } = req.body;
-        const user = await User.findOne({ email: email });
+        const { song, id } = req.body;
+        const user = await User.findById({ _id: id });
         const songId = await Song.findOne(song)._id;
         // check if id is already in favorite songs
 
@@ -27,8 +27,8 @@ router.post("/song", verifyToken, async (req, res) => {
 
 router.post("/artist", verifyToken, async (req, res) => {
     try {
-        const { artist, email } = req.body;
-        const user = await User.findOne({ email: email });
+        const { artist, id } = req.body;
+        const user = await User.findById({ _id: id });
         const artistId = await Artist.findOne(artist)._id;
 
         user.favoriteArtists.push(artistId);
@@ -40,8 +40,8 @@ router.post("/artist", verifyToken, async (req, res) => {
 });
 router.post("/album", verifyToken, async (req, res) => {
     try {
-        const { album, email } = req.body;
-        const user = await User.findOne({ email: email });
+        const { album, id } = req.body;
+        const user = await User.findById({ _id: id });
         const albumId = await Album.findOne(album)._id;
 
         user.favoriteAlbums.push(albumId);
@@ -56,8 +56,8 @@ router.post("/album", verifyToken, async (req, res) => {
 // when public anyone can see favorites
 router.get("/songs", verifyToken, async (req, res) => {
     try {
-        const { email } = req.body;
-        const user = await User.findOne({ email: email });
+        const { id } = req.body;
+        const user = await User.findById({ _id: id });
         const songs = []
 
         user.favoriteSongs.forEach(songId => {
@@ -70,11 +70,12 @@ router.get("/songs", verifyToken, async (req, res) => {
     }
 })
 
+//may find by id for artists, song, etc
 router.delete("/artist/:artist", verifyToken, async (req, res) => {
     try {
-        const { email } = req.body;
+        const { id } = req.body;
         const { artist } = req.params;
-        const user = await User.findOne({ email: email });
+        const user = await User.findById({ _id: id });
         const artistId = await Artist.findOne(artist)._id;
 
         user.favoriteArtists.pull(artistId);
@@ -86,9 +87,9 @@ router.delete("/artist/:artist", verifyToken, async (req, res) => {
 
 router.delete("/song/:song", verifyToken, async (req, res) => {
     try {
-        const { email } = req.body;
+        const { id } = req.body;
         const song = req.params;
-        const user = await User.findOne({ email: email });
+        const user = await User.findById({ _id: id });
         const songId = await Song.findOne(song)._id;
 
         user.favoriteSongs.pull(songId);
@@ -100,9 +101,9 @@ router.delete("/song/:song", verifyToken, async (req, res) => {
 
 router.delete("/album/:album", verifyToken, async (req, res) => {
     try {
-        const { email } = req.body;
+        const { id } = req.body;
         const { album } = req.params;
-        const user = await User.findOne({ email: email });
+        const user = await User.findOne({ _id: id });
         const albumId = await Album.findOne(album)._id;
 
         user.favoriteAlbums.pull(albumId)
