@@ -15,9 +15,17 @@ router.post("/song", verifyToken, async (req, res) => {
         const user = await User.findById({ _id: id });
         const songId = await Song.findOne(song)._id;
         // check if id is already in favorite songs
-
-        user.favoriteSongs.push(songId);
-        await user.save();
+        
+        //const exist = user.favoriteSongs(songId);
+        console.log(exist)
+        if (exist) {
+            res.json({ message: "already favorited" })
+        }
+        else {        
+            user.favoriteSongs.push(songId);
+            await user.save();
+            res.json({ message: "add sucessfully" })
+        }
     }
     catch (error) {
         console.error(error.message);
