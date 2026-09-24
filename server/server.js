@@ -39,6 +39,7 @@ app.get("/songs{/:song_title}", async (req, res) => {
         }
         else {
             // song artist/album 
+            // find mongoose version of LIKE/ Regex
             songs = await Song.find({ title: song_title });
         }
         //res.json(songs);
@@ -71,7 +72,7 @@ app.get("/album{/:album_name}", async (req, res) => {
         let album;
 
         if (!album_name) {
-            album = await Album.find();
+            album = await Album.find().populate("artist");
         }
         else {
             album = await Album.find({ name: album_name });
