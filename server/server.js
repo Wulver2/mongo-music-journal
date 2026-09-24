@@ -33,19 +33,8 @@ app.get("/songs{/:song_title}", async (req, res) => {
         const { song_title } = req.params;
         let songs;
         if (!song_title) {
-            songs = await Song.find();
-
-            const results = await Promise.all(
-                songs.map(async (song) => {
-                    const artist = await Artist.findById(song.artist);
-                    const album = await Album.findById(song.album);
-                    return {
-                        song,
-                        artist,
-                        album
-                    };
-                })
-            );
+            songs = await Song.find().populate("artist album");
+            const results = songs
             res.json(results)
         }
         else {

@@ -35,10 +35,10 @@ export function Song() {
                 {songs ?
                     songs.map(song => (
                         <div className="text-white text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500" onClick={(e) => favoriteASong(e, song.song._id)}>
+                            {user ? <button className="hover:bg-gray-500" onClick={(e) => favoriteASong(e, song._id)}>
                                 ★
                             </button> : null}
-                            <h2 className="e">{song.song.title}</h2>
+                            <h2 className="e">{song.title}</h2>
                             <p className=""> by {song.artist.name}</p>
                             {song.album ? <p className=""> On {song.album.title}</p> : null}
                         </div>

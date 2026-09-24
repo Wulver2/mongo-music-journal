@@ -18,7 +18,6 @@ router.post("/song", verifyToken, async (req, res) => {
         // check if id is already in favorite songs
 
         //const exist = user.favoriteSongs(songId);
-        console.log(exist)
         if (exist) {
             res.json({ message: "already favorited" })
         }
