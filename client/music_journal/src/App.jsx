@@ -8,6 +8,8 @@ import { Settings } from './pages/settings'
 import { Song } from './pages/allSongs'
 import { UserContextProvider } from '../context/userContext'
 import { Favorites } from "./pages/favorites"
+import { Albums } from "./pages/listAlbums"
+import { Artists } from "./pages/listArtists"
 
 axios.defaults.withCredentials = true;
 
@@ -25,6 +27,8 @@ function App() {
               <Route path='/settings' element={<Settings />} />
               <Route path='/songs' element={<Song />} />
               <Route path='/favorites' element={<Favorites />} />
+              <Route path='/albums' element={<Albums/>}/>
+              <Route path='/artists' element={<Artists/>}/>
             </Routes>
           </BrowserRouter>
         </UserContextProvider>
