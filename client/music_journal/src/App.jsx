@@ -16,7 +16,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <>
-      <div className='bg-neutral-900 h-screen'>
+      <div className='bg-neutral-900 h-screen text-white'>
         <UserContextProvider>
           <BrowserRouter>
             <Navbar></Navbar>

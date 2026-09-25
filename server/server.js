@@ -48,7 +48,7 @@ app.get("/songs{/:song_title}", async (req, res) => {
     }
 });
 
-app.get("/artist{/:artist_name}", async (req, res) => {
+app.get("/artists{/:artist_name}", async (req, res) => {
     try {
         const { artist_name } = req.params;
         let artist;
@@ -66,7 +66,7 @@ app.get("/artist{/:artist_name}", async (req, res) => {
     }
 });
 
-app.get("/album{/:album_name}", async (req, res) => {
+app.get("/albums{/:album_name}", async (req, res) => {
     try {
         const { album_name } = req.params;
         let album;

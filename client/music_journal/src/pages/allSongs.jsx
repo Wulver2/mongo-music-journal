@@ -30,11 +30,11 @@ export function Song() {
 
     return (
         <>
-            <h1 className="text-white text-center">Songs</h1>
+            <h1 className="text-center">Songs</h1>
             <div className="flex justify-items-center gap-3">
                 {songs ?
                     songs.map(song => (
-                        <div className="text-white text-center flex flex-col">
+                        <div className="text-center flex flex-col">
                             {user ? <button className="hover:bg-gray-500" onClick={(e) => favoriteASong(e, song._id)}>
                                 ★
                             </button> : null}
@@ -43,7 +43,7 @@ export function Song() {
                             {song.album ? <p className=""> On {song.album.title}</p> : null}
                         </div>
                     ))
-                    : <h2 className="text-white text-center">A problem has occured songs didn't load</h2>
+                    : <h2 className="text-center">A problem has occured songs didn't load</h2>
                 }
             </div>
         </>
