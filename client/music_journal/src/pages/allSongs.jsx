@@ -31,7 +31,7 @@ export function Song() {
     return (
         <>
             <h1 className="text-center">Songs</h1>
-            <div className="flex justify-items-center gap-3">
+            <div className="flex justify-items-center gap-3 ml-24">
                 {songs ?
                     songs.map(song => (
                         <div className="text-center flex flex-col">

@@ -19,7 +19,7 @@ export function Albums() {
     return (
         <>
             <h1 className="text-center">Albums</h1>
-            <div className="flex justify-items-center gap-3">
+            <div className="flex justify-items-center gap-3 ml-24">
                 {albums ?
                     albums.map(album => (
                         <div className="text-center flex flex-col">
