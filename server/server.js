@@ -40,7 +40,7 @@ app.get("/songs{/:id}", async (req, res) => {
         else {
             // song artist/album 
             // find mongoose version of LIKE/ Regex
-            songs = await Song.findById({ _id: id });
+            songs = await Song.findById(id);
         }
         //res.json(songs);
     } catch (error) {
