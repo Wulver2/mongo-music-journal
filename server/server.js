@@ -28,11 +28,11 @@ await connectDB();
 // get songs, artist with list of songs and albums, genres also shows related artists,
 // album with list of songs from album, get a song (with lyrics?)
 
-app.get("/songs{/:song_title}", async (req, res) => {
+app.get("/songs{/:id}", async (req, res) => {
     try {
-        const { song_title } = req.params;
+        const { id } = req.params;
         let songs;
-        if (!song_title) {
+        if (!id) {
             songs = await Song.find().populate("artist album");
             const results = songs
             res.json(results)
@@ -40,7 +40,7 @@ app.get("/songs{/:song_title}", async (req, res) => {
         else {
             // song artist/album 
             // find mongoose version of LIKE/ Regex
-            songs = await Song.find({ title: song_title });
+            songs = await Song.findById({ _id: id });
         }
         //res.json(songs);
     } catch (error) {
@@ -48,16 +48,16 @@ app.get("/songs{/:song_title}", async (req, res) => {
     }
 });
 
-app.get("/artists{/:artist_name}", async (req, res) => {
+app.get("/artists{/:id}", async (req, res) => {
     try {
-        const { artist_name } = req.params;
+        const { id } = req.params;
         let artist;
 
-        if (!artist_name) {
+        if (!id) {
             artist = await Artist.find();
         }
         else {
-            artist = await Artist.find({ name: artist_name });
+            artist = await Artist.findById({ _id: id });
         }
 
         res.json(artist);
@@ -66,16 +66,16 @@ app.get("/artists{/:artist_name}", async (req, res) => {
     }
 });
 
-app.get("/albums{/:album_name}", async (req, res) => {
+app.get("/albums{/:id}", async (req, res) => {
     try {
-        const { album_name } = req.params;
+        const { id } = req.params;
         let album;
 
-        if (!album_name) {
+        if (!id) {
             album = await Album.find().populate("artist");
         }
         else {
-            album = await Album.find({ name: album_name });
+            album = await Album.findById({ _id: id });
         }
 
         res.json(album);

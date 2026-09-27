@@ -1,0 +1,1 @@
+// dynamically render artists info 
