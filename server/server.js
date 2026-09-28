@@ -59,9 +59,10 @@ app.get("/artists{/:id}", async (req, res) => {
         }
         else {
             artist = await Artist.findById({ _id: id });
-            const albums = await Album.find({artist: id});
-            const songs = await Song.find({artist:id});
-            res.json({artist, albums, songs})
+            const albums = await Album.find({ artist: id });
+            const songs = await Song.find({ artist: id });
+
+            res.json({artist, albums, songs});
         }
 
     } catch (error) {

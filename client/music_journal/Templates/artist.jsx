@@ -20,11 +20,26 @@ export function ArtistProfile() {
 
     useEffect(() => {
         getArtist();
-    }, [])
+    }, []);
+
     return (
         <div className="ml-24">
-            {artist ?
-                <h1 className="text-center">{artist.name}</h1>
+            {artist.artist ?
+                <>
+                    <h1 className="text-center">{artist.artist.name}</h1>
+                    <div className="flex gap-40">
+                        <div className="ml-24">
+                            {artist.albums.map(album => (
+                                <p>{album.title}</p>
+                            ))}
+                        </div>
+                        <div className="">
+                            {artist.songs.map(song => (
+                                <p>{song.title}</p>
+                            ))}
+                        </div>
+                    </div>
+                </>
                 :
                 null
             }
