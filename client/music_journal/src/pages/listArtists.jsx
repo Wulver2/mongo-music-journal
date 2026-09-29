@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 export function Artists() {
     const [artist, setArtist] = useState([])
+    const navigate = useNavigate();
 
     const getArtists = async () => {
         try {
@@ -18,6 +20,11 @@ export function Artists() {
         getArtists();
     }, []);
 
+    const goToArtistsProf = (e,id) => {
+        e.preventDefault();
+        navigate(`/artist/${id}`);
+    }
+
     return (
         <>
             <h1 className="text-center">Artists</h1>
@@ -25,7 +32,7 @@ export function Artists() {
                 {artist ?
                     artist.map(artist => (
                         <div className="text-center flex flex-col">
-                            <h2>{artist.name}</h2>
+                            <h2 onClick={(e) => {goToArtistsProf(e, artist._id)}}>{artist.name}</h2>
                         </div>
                     ))
                     :
