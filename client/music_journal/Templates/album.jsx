@@ -19,11 +19,16 @@ export function AlbumProfile() {
     useEffect(() => {
         getAlbum();
     },[])
+
     return (
-        <div>
-            {album ?
+        <div className="ml-48">
+            {album.album ?
                 <>
-                <h1 className="text-center">{album.title}</h1>
+                <h1 className="text-center">{album.album.title}</h1>
+                <h2>{album.album.artist.name}</h2>
+                {album.songs.map(song => (
+                    <li>{song.title}</li>
+                ))}
                 </>
                 :
                 <p>Problem loading album info</p>
