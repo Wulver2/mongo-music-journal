@@ -77,12 +77,14 @@ app.get("/albums{/:id}", async (req, res) => {
 
         if (!id) {
             album = await Album.find().populate("artist");
+            res.json(album)
         }
         else {
-            album = await Album.findById({ _id: id });
+            album = await Album.findById({ _id: id }).populate("artist");
+            const songs = await Song.find({album: id});
+            res.json({album, songs});
         }
 
-        res.json(album);
     } catch (error) {
         console.error(error.message);
     }
