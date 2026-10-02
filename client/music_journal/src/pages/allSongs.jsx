@@ -1,10 +1,12 @@
 import axios from "axios"
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/userContext";
+import { useNavigate } from "react-router";
 
 export function Song() {
     const [songs, setSongs] = useState([])
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const getSongs = async () => {
         try {
@@ -28,6 +30,11 @@ export function Song() {
         getSongs();
     }, []);
 
+    const goToSongProf = (e,id) => {
+        e.preventDefault();
+
+        navigate(`/song/${id}`);
+    }
     return (
         <>
             <h1 className="text-center">Songs</h1>
@@ -38,7 +45,7 @@ export function Song() {
                             {user ? <button className="hover:bg-gray-500" onClick={(e) => favoriteASong(e, song._id)}>
                                 ★
                             </button> : null}
-                            <h2 className="e">{song.title}</h2>
+                            <h2 onClick={(e)=>{goToSongProf(e, song._id)}}>{song.title}</h2>
                             <p className=""> by {song.artist.name}</p>
                             {song.album ? <p className=""> On {song.album.title}</p> : null}
                         </div>

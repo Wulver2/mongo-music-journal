@@ -36,7 +36,7 @@ app.get("/songs{/:id}", async (req, res) => {
             songs = await Song.find().populate("artist album");
         }
         else {
-            songs = await Song.findById(id).populate('aritst album');
+            songs = await Song.findById(id).populate("artist album");
         }
         res.json(songs)
     } catch (error) {
