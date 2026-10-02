@@ -34,15 +34,11 @@ app.get("/songs{/:id}", async (req, res) => {
         let songs;
         if (!id) {
             songs = await Song.find().populate("artist album");
-            const results = songs
-            res.json(results)
         }
         else {
-            // song artist/album 
-            // find mongoose version of LIKE/ Regex
-            songs = await Song.findById(id);
+            songs = await Song.findById(id).populate('aritst album');
         }
-        //res.json(songs);
+        res.json(songs)
     } catch (error) {
         console.error(error.message);
     }
