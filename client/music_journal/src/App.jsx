@@ -12,6 +12,7 @@ import { Albums } from "./pages/listAlbums"
 import { Artists } from "./pages/listArtists"
 import { ArtistProfile } from "../Templates/artist"
 import { AlbumProfile } from "../Templates/album"
+import { SongProfile } from "../Templates/song"
 
 axios.defaults.withCredentials = true;
 
@@ -33,6 +34,7 @@ function App() {
               <Route path='/artists' element={<Artists/>}/>
               <Route path='/artist/:id' element={<ArtistProfile/>}/>
               <Route path='/album/:id' element={<AlbumProfile/>}/>
+              <Route path='/song/:id' element={<SongProfile/>}/>
             </Routes>
           </BrowserRouter>
         </UserContextProvider>
