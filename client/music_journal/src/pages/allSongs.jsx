@@ -22,6 +22,7 @@ export function Song() {
         try {
             //limited to logged in users
             await axios.post("http://localhost:5001/favorites/song", {song: songId, id: user.id})
+            console.log("favorited")
         } catch (error) {
             console.log(error.message)
         }
