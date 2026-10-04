@@ -17,7 +17,7 @@ router.post("/song", verifyToken, async (req, res) => {
         const songId = await Song.findOne(song)._id;
         // check if id is already in favorite songs
 
-        //const exist = user.favoriteSongs(songId);
+        const exist = user.favoriteSongs(songId);
         if (exist) {
             res.json({ message: "already favorited" })
         }
@@ -62,17 +62,13 @@ router.post("/album", verifyToken, async (req, res) => {
 
 // may not need to be protected unless user selects private
 // when public anyone can see favorites
-router.get("/songs", verifyToken, async (req, res) => {
+router.get("/songs/:id", verifyToken, async (req, res) => {
     try {
-        const { id } = req.body;
-        const user = await User.findById({ _id: id });
-        const songs = []
+        const { id } = req.params;
+        const user = await User.findById({ _id: id }).populate('favoriteSongs');
+        const songs = user.favoriteSongs
 
-        user.favoriteSongs.forEach(songId => {
-            songs.push(Song.findById(songId));
-        });
-
-        res.status(200).json(songs)
+        return res.status(200).json(songs)
     } catch (error) {
         console.error(error.message)
     }

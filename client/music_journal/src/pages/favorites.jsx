@@ -16,7 +16,7 @@ export function Favorites() {
     const getFavorites = async () => {
         try {
             //add albums and artists later
-            const songs = await axios.get("https:/localhost:5001/favorites/songs", user.id);
+            const songs = await axios.get(`http://localhost:5001/favorites/songs/${user.id}`);
             setFavoriteSongs(songs.data);
         } catch (error) {
             console.log(error.message);
@@ -25,6 +25,7 @@ export function Favorites() {
 
     useEffect(() => {
         getFavorites();
+        
     }, []);
 
     return (

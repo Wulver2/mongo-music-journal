@@ -10,7 +10,7 @@ export function Song() {
 
     const getSongs = async () => {
         try {
-            const songsInfo = await axios.get("http://localhost:5001/songs");
+            const songsInfo = await axios.get("https://localhost:5001/songs");
             setSongs(songsInfo.data);
         } catch (error) {
             console.error(error.message);
@@ -21,7 +21,7 @@ export function Song() {
         e.preventDefault()
         try {
             //limited to logged in users
-            await axios.post("http://localhost:5001/favorites/song", {song: songId, id: user.id})
+            await axios.post("https://localhost:5001/favorites/song", {song: songId, id: user.id})
             console.log("favorited")
         } catch (error) {
             console.log(error.message)
