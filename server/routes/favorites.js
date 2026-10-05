@@ -11,20 +11,19 @@ export const router = express.Router("express");
 // TODO:// prevent song, artists, etc from being added multiple times
 router.post("/song", verifyToken, async (req, res) => {
     try {
-        // don't need to find song id already given
-        const { song, id } = req.body;
+        const { songId, id } = req.body;
         const user = await User.findById({ _id: id });
-        const songId = await Song.findOne(song)._id;
-        // check if id is already in favorite songs
 
-        const exist = user.favoriteSongs(songId);
+        const exist = user.favoriteSongs.includes(songId);
+        console.log(songId)
+        console.log(exist)
         if (exist) {
-            res.json({ message: "already favorited" })
+            return res.status(200).json({ message: "already favorited" })
         }
         else {        
             user.favoriteSongs.push(songId);
             await user.save();
-            res.json({ message: "add sucessfully" })
+            return res.status(200).json({ message: "add sucessfully" })
         }
     }
     catch (error) {
