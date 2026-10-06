@@ -34,7 +34,7 @@ router.post("/artist", verifyToken, async (req, res) => {
     try {
         const { artistId, id } = req.body;
         const user = await User.findById({ _id: id });
-        const exist = user.favoriteAlbums.includes(artistId);
+        const exist = user.favoriteArtists.includes(artistId);
 
         if (exist) {
             return res.status(200).json({ message: "already favorited" })
@@ -51,12 +51,18 @@ router.post("/artist", verifyToken, async (req, res) => {
 });
 router.post("/album", verifyToken, async (req, res) => {
     try {
-        const { album, id } = req.body;
+        const { albumId, id } = req.body;
         const user = await User.findById({ _id: id });
-        const albumId = await Album.findOne(album)._id;
+        const exist = user.favoriteAlbums.includes(albumId);
 
-        user.favoriteAlbums.push(albumId);
-        await user.save();
+        if (exist) {
+            return res.status(200).json({ message: "already favorited" })
+        }
+        else {
+            user.favoriteAlbums.push(albumId);
+            await user.save();
+            return res.status(200).json({ message: "add successful" })
+        }
     }
     catch (error) {
         console.error(error.message);
