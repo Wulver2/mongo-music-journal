@@ -25,6 +25,16 @@ export function Albums() {
         e.preventDefault();
         navigate(`/album/${id}`);
     }
+
+    const favoriteAlbum = async(e, id) => {
+        e.preventDefault()
+        try {
+            await axios.post("http://localhost:5001/favorites/album", {albumId: id, id: user.id})
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
     return (
         <>
             <h1 className="text-center">Albums</h1>
@@ -32,7 +42,7 @@ export function Albums() {
                 {albums ?
                     albums.map(album => (
                         <div className="text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500">
+                            {user ? <button className="hover:bg-gray-500" onClick={(e) => {favoriteAlbum(e, album._id)}}>
                                 ★
                             </button> : null}
                             <h2 onClick={(e) => { goToAlbum(e, album._id) }}>{album.title} by {album.artist.name}</h2>

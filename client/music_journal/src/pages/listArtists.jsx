@@ -27,6 +27,15 @@ export function Artists() {
         navigate(`/artist/${id}`);
     }
 
+    const favriteArtist = async(e, id) => {
+        e.preventDefault()
+        try {
+            await axios.post("http://localhost:5001/favorites/artist", {artistId: id, id: user.id});
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
     return (
         <>
             <h1 className="text-center">Artists</h1>
@@ -34,7 +43,7 @@ export function Artists() {
                 {artist ?
                     artist.map(artist => (
                         <div className="text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500">
+                            {user ? <button className="hover:bg-gray-500" onClick={(e) => {favriteArtist(e, artist._id)}}>
                                 ★
                             </button> : null}
                             <h2 onClick={(e) => { goToArtistsProf(e, artist._id) }}>{artist.name}</h2>
