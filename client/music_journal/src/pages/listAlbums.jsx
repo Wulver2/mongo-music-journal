@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router"
+import { UserContext } from "../../context/userContext"
 
 export function Albums() {
     const [albums, setAlbums] = useState([])
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const getAlbums = async () => {
@@ -30,7 +32,10 @@ export function Albums() {
                 {albums ?
                     albums.map(album => (
                         <div className="text-center flex flex-col">
-                            <h2 onClick={(e) => {goToAlbum(e, album._id)}}>{album.title} by {album.artist.name}</h2>
+                            {user ? <button className="hover:bg-gray-500">
+                                ★
+                            </button> : null}
+                            <h2 onClick={(e) => { goToAlbum(e, album._id) }}>{album.title} by {album.artist.name}</h2>
                         </div>
                     ))
                     :

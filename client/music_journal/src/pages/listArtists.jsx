@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { UserContext } from "../../context/userContext";
 
 export function Artists() {
     const [artist, setArtist] = useState([])
+    const {user} = useContext(UserContext)
     const navigate = useNavigate();
 
     const getArtists = async () => {
@@ -20,7 +22,7 @@ export function Artists() {
         getArtists();
     }, []);
 
-    const goToArtistsProf = (e,id) => {
+    const goToArtistsProf = (e, id) => {
         e.preventDefault();
         navigate(`/artist/${id}`);
     }
@@ -32,7 +34,10 @@ export function Artists() {
                 {artist ?
                     artist.map(artist => (
                         <div className="text-center flex flex-col">
-                            <h2 onClick={(e) => {goToArtistsProf(e, artist._id)}}>{artist.name}</h2>
+                            {user ? <button className="hover:bg-gray-500">
+                                ★
+                            </button> : null}
+                            <h2 onClick={(e) => { goToArtistsProf(e, artist._id) }}>{artist.name}</h2>
                         </div>
                     ))
                     :
