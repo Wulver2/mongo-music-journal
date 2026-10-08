@@ -75,11 +75,35 @@ router.get("/songs/:id", verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById({ _id: id }).populate('favoriteSongs');
-        const songs = user.favoriteSongs
+        const songs = user.favoriteSongs;
 
-        return res.status(200).json(songs)
+        return res.status(200).json(songs);
     } catch (error) {
         console.error(error.message)
+    }
+})
+
+router.get("/artists/:id", verifyToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = User.findById({ _id: id }).populate('favortieArtists');
+        const artists = user.favoriteArtists;
+
+        return res.status(200).json(artists);
+    } catch (error) {
+        console.error(error.message)
+    }
+});
+
+router.get("/albums/:id", verifyToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = User.findById({ _id: id }).populate('favoriteAlbums');
+        const albums = user.favoriteAlbums;
+
+        return res.status(200).json(albums);
+    } catch (error) {
+        console.error(error.message);
     }
 })
 
