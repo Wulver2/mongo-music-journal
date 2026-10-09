@@ -11,13 +11,21 @@ export function Favorites() {
         artists: [],
     }]*/
 
-    const [favortieSongs, setFavoriteSongs] = useState([])
+    const [favortieSongs, setFavoriteSongs] = useState([]);
+    const [favoriteArtists, setFavoriteArtists] = useState([]);
+    const [favoriteAlbums, setFavoritesAlbums] = useState([])
 
     const getFavorites = async () => {
         try {
             //add albums and artists later
-            const songs = await axios.get(`http://localhost:5001/favorites/songs/${user.id}`);
+            const id = user.id;
+            const songs = await axios.get(`http://localhost:5001/favorites/songs/${id}`);
+            const artists = await axios.get(`http://localhost:5001/favorites/artists/${id}`);
+            const albums = await axios.get(`http://localhost:5001/favorties/albums/${id}`)
+
             setFavoriteSongs(songs.data);
+            setFavoriteArtists(artists.data);
+            setFavoritesAlbums(albums.data);
         } catch (error) {
             console.log(error.message);
         }
