@@ -21,7 +21,7 @@ export function Favorites() {
             const id = user.id;
             const songs = await axios.get(`http://localhost:5001/favorites/songs/${id}`);
             const artists = await axios.get(`http://localhost:5001/favorites/artists/${id}`);
-            const albums = await axios.get(`http://localhost:5001/favorties/albums/${id}`)
+            const albums = await axios.get(`http://localhost:5001/favorites/albums/${id}`)
 
             setFavoriteSongs(songs.data);
             setFavoriteArtists(artists.data);
@@ -33,19 +33,31 @@ export function Favorites() {
 
     useEffect(() => {
         getFavorites();
-        
+
     }, []);
 
     return (
         <div className="ml-24">
             <h1>Favorites</h1>
             <div>
-                {favortieSongs ? 
-                favortieSongs.map(song => (
-                    <p>{song.title}</p>
-                ))
-                :
-                <p>Favorite Songs did not load</p>}
+                {favortieSongs ?
+                    favortieSongs.map(song => (
+                        <p>{song.title}</p>
+                    ))
+                    :
+                    <p>No songs favorited</p>}
+                {favoriteArtists ?
+                    favoriteArtists.map(artist => (
+                        <p>{artist.name}</p>
+                    ))
+                    :
+                    <p>No artists favorited </p>}
+                {favoriteAlbums ?
+                    favoriteAlbums.map(album => (
+                        <p>{album.title}</p>
+                    ))
+                    :
+                    <p>no albums favorited</p>}
             </div>
         </div>
     )

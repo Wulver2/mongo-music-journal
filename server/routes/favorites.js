@@ -86,7 +86,7 @@ router.get("/songs/:id", verifyToken, async (req, res) => {
 router.get("/artists/:id", verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
-        const user = User.findById({ _id: id }).populate('favortieArtists');
+        const user = await User.findById({ _id: id }).populate('favoriteArtists');
         const artists = user.favoriteArtists;
 
         return res.status(200).json(artists);
@@ -98,7 +98,7 @@ router.get("/artists/:id", verifyToken, async (req, res) => {
 router.get("/albums/:id", verifyToken, async (req, res) => {
     try {
         const { id } = req.params;
-        const user = User.findById({ _id: id }).populate('favoriteAlbums');
+        const user = await User.findById({ _id: id }).populate('favoriteAlbums');
         const albums = user.favoriteAlbums;
 
         return res.status(200).json(albums);
