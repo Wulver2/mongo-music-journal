@@ -39,7 +39,7 @@ export function Favorites() {
     return (
         <div className="ml-24">
             <h1>Favorites</h1>
-            <div>
+            <div className="flex gap-x-10">
                 {favortieSongs ?
                     favortieSongs.map(song => (
                         <p>{song.title}</p>
@@ -57,7 +57,7 @@ export function Favorites() {
                         <p>{album.title}</p>
                     ))
                     :
-                    <p>no albums favorited</p>}
+                    <p>No albums favorited</p>}
             </div>
         </div>
     )
