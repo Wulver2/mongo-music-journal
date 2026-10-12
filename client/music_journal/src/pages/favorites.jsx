@@ -40,24 +40,30 @@ export function Favorites() {
         <div className="ml-24">
             <h1>Favorites</h1>
             <div className="flex gap-x-10">
-                {favortieSongs ?
-                    favortieSongs.map(song => (
-                        <p>{song.title}</p>
-                    ))
-                    :
-                    <p>No songs favorited</p>}
-                {favoriteArtists ?
-                    favoriteArtists.map(artist => (
-                        <p>{artist.name}</p>
-                    ))
-                    :
-                    <p>No artists favorited </p>}
-                {favoriteAlbums ?
-                    favoriteAlbums.map(album => (
-                        <p>{album.title}</p>
-                    ))
-                    :
-                    <p>No albums favorited</p>}
+                <div>
+                    {favortieSongs ?
+                        favortieSongs.map(song => (
+                            <p>{song.title}</p>
+                        ))
+                        :
+                        <p>No songs favorited</p>}
+                </div>
+                <div>
+                    {favoriteArtists ?
+                        favoriteArtists.map(artist => (
+                            <p>{artist.name}</p>
+                        ))
+                        :
+                        <p>No artists favorited </p>}
+                </div>
+                <div>
+                    {favoriteAlbums ?
+                        favoriteAlbums.map(album => (
+                            <p>{album.title}</p>
+                        ))
+                        :
+                        <p>No albums favorited</p>}
+                </div>
             </div>
         </div>
     )
