@@ -23,10 +23,21 @@ describe('Registration', () => {
         cy.get("#confirmPassword").type("password123");
         cy.get('#regiButton').click()
         cy.url().should('eq', 'http://localhost:5173/')
+        // should put this in another test in case it breaks 
         cy.get('[data-cy="settings"]').click()
         cy.url().should('eq', 'http://localhost:5173/settings')
         cy.get('[data-cy="deleteAcc"]').click();
         cy.url().should('eq', 'http://localhost:5173/')
     })
     // delete user so that test can be used again -> have to add delete user route
+
+    it("user email in use already", () => {
+        cy.get("#email").type("inuse@example.com");
+        cy.get("#username").type("inuse");
+        cy.get("#password").type("123");
+        cy.get("#confirmPassword").type("123");
+        cy.get("#regiButton").click();
+        cy.url().should('eq', 'http://localhost:5173/register');
+        // should display email in use error
+    })
 })
