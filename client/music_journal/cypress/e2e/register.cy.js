@@ -1,5 +1,4 @@
-/// <reference types="Cypress" />
-
+// TODO: will switch to using data-testid
 describe('Registration', () => {
     beforeEach(() => {
         cy.visit('/register');
@@ -39,5 +38,11 @@ describe('Registration', () => {
         cy.get("#regiButton").click();
         cy.url().should('eq', 'http://localhost:5173/register');
         // should display email in use error
+    })
+
+    it("displays missing field if a field is left empty", () => {
+        cy.get("regiButton").click();
+        cy.url().should('eq', 'http://localhost:5173/register');
+        cy.get('[data-testid="errorMess"]').should('eq', 'Field(s) missing');
     })
 })
