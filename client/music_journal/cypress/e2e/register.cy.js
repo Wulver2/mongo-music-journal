@@ -2,11 +2,11 @@
 
 describe('Registration', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/register');
+        cy.visit('/register');
     });
     // one test for sucessful login (goes to dash board)
     // one for incorrect confirm password
-    it("user enters incorrect confirm password", () => {
+    it(" displays error when user enters incorrect confirm password", () => {
         //email
         cy.get("#email").type("register@example.com");
         cy.get("#username").type("registerTest");
@@ -16,7 +16,7 @@ describe('Registration', () => {
         cy.url().should('eq', 'http://localhost:5173/register')
         cy.get("#matchError").should('contain', "Passwords do not match");
     })
-    it("user successfully registers", () => {
+    it("goes to home page when user successfully registers", () => {
         cy.get("#email").type("register@example.com");
         cy.get("#username").type("registerTest");
         cy.get("#password").type("password123");
@@ -31,7 +31,7 @@ describe('Registration', () => {
     })
     // delete user so that test can be used again -> have to add delete user route
 
-    it("user email in use already", () => {
+    it("tests when user email in use already", () => {
         cy.get("#email").type("inuse@example.com");
         cy.get("#username").type("inuse");
         cy.get("#password").type("123");
