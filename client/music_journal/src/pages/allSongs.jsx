@@ -40,9 +40,9 @@ export function Song() {
             <h1 className="text-center">Songs</h1>
             <div className="flex justify-items-center gap-3 ml-24">
                 {songs ?
-                    songs.map(song => (
+                    songs.map((song, index) => (
                         <div className="text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500" onClick={(e) => favoriteASong(e, song._id)}>
+                            {user ? <button className="hover:bg-gray-500" data-cy={`star${index}`} onClick={(e) => favoriteASong(e, song._id)}>
                                 ★
                             </button> : null}
                             <h2 onClick={(e)=>{goToSongProf(e, song._id)}}>{song.title}</h2>
