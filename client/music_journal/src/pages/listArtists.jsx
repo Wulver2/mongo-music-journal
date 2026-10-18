@@ -41,9 +41,9 @@ export function Artists() {
             <h1 className="text-center">Artists</h1>
             <div className="flex justify-items-center gap-3 ml-24">
                 {artist ?
-                    artist.map(artist => (
+                    artist.map((artist, index) => (
                         <div className="text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500" onClick={(e) => {favriteArtist(e, artist._id)}}>
+                            {user ? <button className="hover:bg-gray-500" data-cy={`star${index}`}  onClick={(e) => {favriteArtist(e, artist._id)}}>
                                 ★
                             </button> : null}
                             <h2 onClick={(e) => { goToArtistsProf(e, artist._id) }}>{artist.name}</h2>

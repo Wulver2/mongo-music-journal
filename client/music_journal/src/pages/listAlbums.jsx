@@ -40,9 +40,9 @@ export function Albums() {
             <h1 className="text-center">Albums</h1>
             <div className="flex justify-items-center gap-3 ml-24">
                 {albums ?
-                    albums.map(album => (
+                    albums.map((album, index) => (
                         <div className="text-center flex flex-col">
-                            {user ? <button className="hover:bg-gray-500" onClick={(e) => {favoriteAlbum(e, album._id)}}>
+                            {user ? <button className="hover:bg-gray-500" data-cy={`star${index}`} onClick={(e) => {favoriteAlbum(e, album._id)}}>
                                 ★
                             </button> : null}
                             <h2 onClick={(e) => { goToAlbum(e, album._id) }}>{album.title} by {album.artist.name}</h2>
