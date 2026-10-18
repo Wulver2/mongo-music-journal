@@ -1,9 +1,10 @@
 describe('viewing songs, albums, etc logged-in', () => {
-    be
     before("log in", () => {
         //login
         cy.visit("login")
-        cy.visit("[data-cy='email']")
+        cy.get("[data-cy='email']").type("test@example.com");
+        cy.get("[data-cy='password']").type("password");
+        cy.get("[data-cy='submit']").click();
         cy.visit("/songs")
     })
     it("shows favorite button on each song", () => {
