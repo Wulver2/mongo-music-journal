@@ -6,7 +6,7 @@ import { UserContext } from "../../context/userContext"
 
 export function Login() {
     const navigate = useNavigate();
-    const {setUser} = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -32,20 +32,23 @@ export function Login() {
             bg-gray-900 text-white p-8 gap-2
             ">
                 <label htmlFor="email"> Email: </label>
-                <input type="email" id="email" placeholder="email"
+                <input type="email" data-cy="email" placeholder="email"
                     className="outline-solid rounded-sm outline-gray-5"
                     onChange={
                         (e) => {
                             setForm({ ...form, email: e.target.value })
                         }} />
                 <label htmlFor="password"> Password: </label>
-                <input type="password" placeholder="password" id="password"
+                <input type="password" placeholder="password" data-cy="password"
                     className="outline-solid rounded-sm outline-gray-50"
                     onChange={
                         (e) => {
                             setForm({ ...form, password: e.target.value })
                         }} />
-                <button type="submit" className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700">Log in</button>
+                <button type="submit" data-cy="submit"
+                className="pl-28  pr-28 bg-green-600 self-center rounded-sm hover:bg-green-700">
+                    Log in
+                </button>
                 <p>Don't have an account? <Link to="/register" className="underline text-blue-400">sign up now</Link></p>
             </form>
         </>
