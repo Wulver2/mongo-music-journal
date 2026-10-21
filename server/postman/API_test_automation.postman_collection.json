@@ -38,7 +38,18 @@
       "response": []
     },
     {
-      "name": "New Request",
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"login successful\" , ()=> {\n    pm.response.to.have.status(200)\n});\n\npm.test(\"session token exists\" , ()=> {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.true;\n});"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
