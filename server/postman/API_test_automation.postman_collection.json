@@ -38,7 +38,7 @@
       "response": []
     },
     {
-      "name": "Login",
+      "name": "Valid credentials login",
       "event": [
         {
           "listen": "test",
@@ -56,6 +56,166 @@
         "body": {
           "mode": "raw",
           "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "False credentials login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"login fails and sends 401\", () => {\n    pm.response.to.have.status(401)\n});\n\npm.test(\"Does not have a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"fail@example.com\",\n    \"password\": \"fail\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Missing email login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"responds with a 401 status\", () => {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Does not have a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"\",\n    \"password\":\"123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Missing password login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"responds with a 401 status\", () => {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Does not have a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\":\"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5001/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid password login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"responds with a 401 status\", () => {\n    pm.response.to.have.status(401);\n});\n\npm.test(\"Does not have a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\":\"Wrong\"\n}",
           "options": {
             "raw": {
               "language": "json"
