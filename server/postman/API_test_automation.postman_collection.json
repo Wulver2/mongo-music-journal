@@ -78,6 +78,46 @@
       "response": []
     },
     {
+      "name": "logout",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Does not have a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n})"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Has a session token\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/auth/logout",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "logout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "False credentials login",
       "event": [
         {
