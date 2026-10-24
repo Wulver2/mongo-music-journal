@@ -15,7 +15,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200)\n});\n"
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"check songs\", ()=> {\n    \n});\n"
             ]
           }
         }
@@ -32,6 +32,36 @@
           "port": "5001",
           "path": [
             "songs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/albums",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "albums"
           ]
         }
       },
@@ -272,6 +302,26 @@
           "path": [
             "auth",
             "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Valid registration",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "auth",
+            "register"
           ]
         }
       },
