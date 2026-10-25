@@ -68,6 +68,36 @@
       "response": []
     },
     {
+      "name": "Get artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5001/artists",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5001",
+          "path": [
+            "artists"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Valid credentials login",
       "event": [
         {
