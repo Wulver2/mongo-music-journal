@@ -7,6 +7,8 @@ import verifyToken from "../middleware/verifyToken.js";
 
 export const router = express.Router("express");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 //must have a unique username
 router.post('/login', async (req, res) => {
     try {
@@ -75,8 +77,8 @@ router.post('/register', async (req, res) => {
                 {
                     expires: new Date(Date.now() + 100 * 60 * 60 * 24 * 7),
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === 'production',
-                    sameSite: 'strict'
+                    secure: isProduction,
+                    sameSite: isProduction ? 'none': 'strict'
                 }
             );
             res.status(201).json({ id: userInfo.id, username: userInfo.username });
@@ -110,8 +112,8 @@ router.delete('/deleteAcc', async (req, res) => {
 
         res.clearCookie("sessionToken", {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'strict',
+            secure: isProduction,
+            sameSite: isProduction ? 'none': 'strict',
             expires: new Date(0)
         });
 
