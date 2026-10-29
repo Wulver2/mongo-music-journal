@@ -7,9 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install packages
-        run: npm install
-        working-directory: ./server
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
@@ -17,7 +14,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          npm start &
-          sleep 5
           postman collection run "58498156-298a2490-222b-47ed-818d-6994a0a3b2ce"
-        working-directory: ./server

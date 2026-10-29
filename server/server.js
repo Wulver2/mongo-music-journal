@@ -9,7 +9,9 @@ import { router as favoritesRouter } from "./routes/favorites.js"
 import cookieParser from "cookie-parser";
 
 
+const PORT = process.env.PORT || 5001
 const app = express();
+
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true
@@ -95,7 +97,7 @@ app.put("/rating", (req, res) => {
 });
 
 
-app.listen(5001, () => {
+app.listen(PORT, () => {
     console.log("Server on")
 });
 

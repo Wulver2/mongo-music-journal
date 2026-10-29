@@ -15,7 +15,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"check songs\", ()=> {\n    \n});\n"
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"check number of songs\", ()=> {\n    const data = pm.response.json();\n    pm.expect(data.length == 7)\n});\n\npm.test(\"songs have all properties\", () => {\n    const data = pm.response.json();\n    console.log(data)\n    for (var i = 0; i< data.length; i++) {\n        pm.expect(data[i]).to.have.property(\"album\");\n        pm.expect(data[i]).to.have.property(\"title\");\n        pm.expect(data[i]).to.have.property(\"_id\");\n        pm.expect(data[i]).to.have.property(\"artist\");\n        pm.expect(data[i]).to.have.property(\"tags\");\n    }\n})\n"
             ]
           }
         }
@@ -24,12 +24,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5001/songs",
-          "protocol": "http",
+          "raw": "{{base_url}}/songs",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "songs"
           ]
@@ -54,12 +52,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5001/albums",
-          "protocol": "http",
+          "raw": "{{base_url}}/albums",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "albums"
           ]
@@ -84,12 +80,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:5001/artists",
-          "protocol": "http",
+          "raw": "{{base_url}}/artists",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "artists"
           ]
@@ -123,12 +117,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5001/auth/login",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/login",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "login"
@@ -163,12 +155,10 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "http://localhost:5001/auth/logout",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/logout",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "logout"
@@ -203,12 +193,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5001/auth/login",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/login",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "login"
@@ -243,12 +231,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5001/auth/login",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/login",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "login"
@@ -283,12 +269,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5001/auth/login",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/login",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "login"
@@ -323,12 +307,10 @@
           }
         },
         "url": {
-          "raw": "http://localhost:5001/auth/login",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/login",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "login"
@@ -339,16 +321,34 @@
     },
     {
       "name": "Valid registration",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"register successful\" , ()=> {\n    pm.response.to.have.status(201)\n});\n\npm.test(\"session token exists\" , ()=> {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.true;\n});\n\nconst userId = pm.response.json().id;\n\npm.collectionVariables.set(\"registeredUserId\", userId);"
+            ]
+          }
+        }
+      ],
       "request": {
         "method": "POST",
         "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\": \"newAcc@example.com\",\n    \"username\": \"newAcc\",\n    \"password\": \"123\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
         "url": {
-          "raw": "http://localhost:5001/auth/register",
-          "protocol": "http",
+          "raw": "{{base_url}}/auth/register",
           "host": [
-            "localhost"
+            "{{base_url}}"
           ],
-          "port": "5001",
           "path": [
             "auth",
             "register"
@@ -356,6 +356,63 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "delete registered account",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"session token is gone\", () => {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.false;\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"{{registeredUserId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/deleteAcc",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "deleteAcc"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "registeredUserId",
+      "value": ""
     }
   ]
 }
