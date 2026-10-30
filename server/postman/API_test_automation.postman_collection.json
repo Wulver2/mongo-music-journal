@@ -24,9 +24,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/songs",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/songs",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "songs"
@@ -52,9 +55,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/albums",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/albums",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "albums"
@@ -80,9 +86,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/artists",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/artists",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "artists"
@@ -117,9 +126,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/login",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/login",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -155,9 +167,12 @@
         "method": "POST",
         "header": [],
         "url": {
-          "raw": "{{base_url}}/auth/logout",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/logout",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -193,9 +208,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/login",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/login",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -231,9 +249,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/login",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/login",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -269,9 +290,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/login",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/login",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -307,9 +331,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/login",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/login",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -345,9 +372,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/register",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/register",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
@@ -360,15 +390,6 @@
     {
       "name": "delete registered account",
       "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              ""
-            ]
-          }
-        },
         {
           "listen": "test",
           "script": {
@@ -392,9 +413,12 @@
           }
         },
         "url": {
-          "raw": "{{base_url}}/auth/deleteAcc",
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/deleteAcc",
+          "protocol": "https",
           "host": [
-            "{{base_url}}"
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
           ],
           "path": [
             "auth",
