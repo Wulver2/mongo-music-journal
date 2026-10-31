@@ -52,11 +52,12 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
     try {
         const { email, username, password } = req.body;
-
-        const hashedPassword = await bcrypt.hash(password, 10);
         //email and username should be unique
         const emailExist = await User.exists({ email: email });
         const usernameExist = await User.exists({ username: username });
+        if (!email || !username || !password) {
+            return res.status(401).json({message: "missing fields"});
+        }
         if (emailExist) {
             res.status(401).json({ message: "email already in use" });
         }
@@ -64,6 +65,7 @@ router.post('/register', async (req, res) => {
             res.status(401).json({ message: "username already in use" })
         }
         else {
+            const hashedPassword = await bcrypt.hash(password, 10);
             const userInfo = await User.create({ email: email, username: username, password: hashedPassword });
             // token and cookie (will make it a function for less code duplication)
             const sessionToken = jwt.sign(
@@ -78,7 +80,7 @@ router.post('/register', async (req, res) => {
                     expires: new Date(Date.now() + 100 * 60 * 60 * 24 * 7),
                     httpOnly: true,
                     secure: isProduction,
-                    sameSite: isProduction ? 'none': 'strict'
+                    sameSite: isProduction ? 'none' : 'strict'
                 }
             );
             res.status(201).json({ id: userInfo.id, username: userInfo.username });
@@ -107,13 +109,13 @@ router.delete('/deleteAcc', async (req, res) => {
     try {
         const { id } = req.body;
 
-        const userInfo = await User.findById({_id: id});
+        const userInfo = await User.findById({ _id: id });
         await userInfo.deleteOne();
 
         res.clearCookie("sessionToken", {
             httpOnly: true,
             secure: isProduction,
-            sameSite: isProduction ? 'none': 'strict',
+            sameSite: isProduction ? 'none' : 'strict',
             expires: new Date(0)
         });
 
