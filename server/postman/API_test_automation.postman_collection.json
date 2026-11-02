@@ -354,7 +354,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"register successful\" , ()=> {\n    pm.response.to.have.status(201)\n});\n\npm.test(\"session token exists\" , ()=> {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.true;\n});\n\nconst userId = pm.response.json().id;\n\npm.collectionVariables.set(\"registeredUserId\", userId);\n\npm.cookies.clear();"
+              "pm.test(\"register successful\" , ()=> {\n    pm.response.to.have.status(201)\n});\n\npm.test(\"session token exists\" , ()=> {\n    const hasCookie = pm.cookies.has(\"sessionToken\");\n    pm.expect(hasCookie).to.be.true;\n});\n\nconst userId = pm.response.json().id;\n\npm.collectionVariables.set(\"registeredUserId\", userId);\npm.collectionVariables.set(\"sessionToken\", pm.cookies.get(\"sessionToken\"))\n"
             ]
           }
         }
@@ -382,6 +382,88 @@
           "path": [
             "auth",
             "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User favorites song",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"songId\": \"6a83130509c738b620e229b0\",\n    \"id\": \"{{registeredUserId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/song",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "song"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View user favorites",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Correct song in favorites\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data[0]).to.have.property(\"_id\", \"6a83130509c738b620e229b0\");\n})"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/songs/{{registeredUserId}}",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "songs",
+            "{{registeredUserId}}"
           ]
         }
       },
@@ -559,6 +641,10 @@
     },
     {
       "key": "registeredUserId",
+      "value": ""
+    },
+    {
+      "key": "sessionToken",
       "value": ""
     }
   ]
