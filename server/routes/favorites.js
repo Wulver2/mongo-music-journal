@@ -21,7 +21,7 @@ router.post("/song", verifyToken, async (req, res) => {
         else {
             user.favoriteSongs.push(songId);
             await user.save();
-            return res.status(200).json({ message: "add sucessful" })
+            return res.status(200).json({ message: "add successful" })
         }
     }
     catch (error) {

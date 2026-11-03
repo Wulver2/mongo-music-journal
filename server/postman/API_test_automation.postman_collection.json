@@ -395,7 +395,7 @@
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n})"
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Return correct message\", () => {\n    const message = pm.response.json();\n    pm.expect(message).to.have.property(\"message\", \"add successful\");\n});"
             ]
           }
         }
@@ -429,14 +429,96 @@
       "response": []
     },
     {
-      "name": "View user favorites",
+      "name": "User favorites album",
       "event": [
         {
           "listen": "test",
           "script": {
             "type": "text/javascript",
             "exec": [
-              "pm.test(\"Correct song in favorites\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data[0]).to.have.property(\"_id\", \"6a83130509c738b620e229b0\");\n})"
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Return correct message\", () => {\n    const message = pm.response.json();\n    pm.expect(message).to.have.property(\"message\", \"add successful\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"albumId\": \"6a83130509c738b620e229ae\",\n    \"id\": \"{{registeredUserId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/album",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "album"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User favorites artist",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Return correct message\", () => {\n    const message = pm.response.json();\n    pm.expect(message).to.have.property(\"message\", \"add successful\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"artistId\": \"6a83130509c738b620e229ad\",\n    \"id\": \"{{registeredUserId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/artist",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "artist"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View user favorite songs",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Correct song in favorites\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data[0]).to.have.property(\"_id\", \"6a83130509c738b620e229b0\");\n});"
             ]
           }
         }
