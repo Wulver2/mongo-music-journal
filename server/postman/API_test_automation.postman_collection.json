@@ -552,6 +552,88 @@
       "response": []
     },
     {
+      "name": "View user favorite albums",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Correct song in favorites\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data[0]).to.have.property(\"_id\", \"6a83130509c738b620e229ae\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/albums/{{registeredUserId}}",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "albums",
+            "{{registeredUserId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "View user favorite artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Correct song in favorites\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data[0]).to.have.property(\"_id\", \"6a83130509c738b620e229ad\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/artists/{{registeredUserId}}",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "artists",
+            "{{registeredUserId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Logout from registration",
       "event": [
         {
