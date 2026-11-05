@@ -634,6 +634,53 @@
       "response": []
     },
     {
+      "name": "Remove favorite song",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"id\": \"{{registeredUserId}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/song/6a83130509c738b620e229b0",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "song",
+            "6a83130509c738b620e229b0"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Logout from registration",
       "event": [
         {

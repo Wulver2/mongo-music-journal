@@ -125,7 +125,7 @@ router.delete("/artist/:artist", verifyToken, async (req, res) => {
 router.delete("/song/:song", verifyToken, async (req, res) => {
     try {
         const { id } = req.body;
-        const song = req.params;
+        const { song } = req.params;
         const user = await User.findById({ _id: id });
         const songId = await Song.findOne(song)._id;
 
