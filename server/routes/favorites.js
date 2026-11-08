@@ -123,14 +123,13 @@ router.delete("/artist/:artist", verifyToken, async (req, res) => {
 });
 
 // song in parameters is the song id 
-router.delete("/song/:song", verifyToken, async (req, res) => {
+router.delete("/song/:id/:songId", verifyToken, async (req, res) => {
     try {
-        const { id } = req.body;
-        const { song } = req.params;
+        const { id, songId } = req.params;
         const user = await User.findById({ _id: id });
         //const songId = await Song.findOne(song)._id;
 
-        user.favoriteSongs.pull(song);
+        user.favoriteSongs.pull(songId);
         await user.save();
     } catch (error) {
         console.error(error.message);
