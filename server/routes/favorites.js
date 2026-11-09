@@ -131,6 +131,8 @@ router.delete("/song/:id/:songId", verifyToken, async (req, res) => {
 
         user.favoriteSongs.pull(songId);
         await user.save();
+
+        return res.status(204);
     } catch (error) {
         console.error(error.message);
     }
