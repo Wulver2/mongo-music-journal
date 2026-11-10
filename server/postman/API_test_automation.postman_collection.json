@@ -673,6 +673,84 @@
       "response": []
     },
     {
+      "name": "Remove favorite album",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {\n    pm.response.to.have.status(204);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/album/{{registeredUserId}}/6a83130509c738b620e229ae",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "album",
+            "{{registeredUserId}}",
+            "6a83130509c738b620e229ae"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remove favorite artists",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 204\", () => {\n    pm.response.to.have.status(204);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "sessionToken",
+            "value": "{{sessionToken}}"
+          }
+        ],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/favorites/song/{{registeredUserId}}/6a83130509c738b620e229ad",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "favorites",
+            "song",
+            "{{registeredUserId}}",
+            "6a83130509c738b620e229ad"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "Logout from registration",
       "event": [
         {

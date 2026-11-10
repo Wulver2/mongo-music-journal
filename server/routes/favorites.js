@@ -108,15 +108,16 @@ router.get("/albums/:id", verifyToken, async (req, res) => {
 })
 
 //may find by id for artists, song, etc
-router.delete("/artist/:artist", verifyToken, async (req, res) => {
+router.delete("/artist/:id/:artistId", verifyToken, async (req, res) => {
     try {
-        const { id } = req.body;
-        const { artist } = req.params;
+        const { id, artistId } = req.params;
         const user = await User.findById({ _id: id });
-        const artistId = await Artist.findOne(artist)._id;
+        //const artistId = await Artist.findOne(artist)._id;
 
         user.favoriteArtists.pull(artistId);
         await user.save();
+
+        return res.status(204);
     } catch (error) {
         console.error(error.message);
     }
@@ -138,15 +139,16 @@ router.delete("/song/:id/:songId", verifyToken, async (req, res) => {
     }
 });
 
-router.delete("/album/:album", verifyToken, async (req, res) => {
+router.delete("/album/:id/:albumId", verifyToken, async (req, res) => {
     try {
-        const { id } = req.body;
-        const { album } = req.params;
+        const { id, albumId } = req.params;
         const user = await User.findOne({ _id: id });
-        const albumId = await Album.findOne(album)._id;
+        //const albumId = await Album.findOne(album)._id;
 
         user.favoriteAlbums.pull(albumId)
         await user.save();
+
+        return res.status(204);
     } catch (error) {
         console.error(error.message);
     }
