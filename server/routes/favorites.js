@@ -117,7 +117,7 @@ router.delete("/artist/:id/:artistId", verifyToken, async (req, res) => {
         user.favoriteArtists.pull(artistId);
         await user.save();
 
-        return res.status(204);
+        res.status(204).end();
     } catch (error) {
         console.error(error.message);
     }
@@ -133,7 +133,7 @@ router.delete("/song/:id/:songId", verifyToken, async (req, res) => {
         user.favoriteSongs.pull(songId);
         await user.save();
 
-        return res.status(204);
+        res.status(204).end();
     } catch (error) {
         console.error(error.message);
     }
@@ -148,7 +148,7 @@ router.delete("/album/:id/:albumId", verifyToken, async (req, res) => {
         user.favoriteAlbums.pull(albumId)
         await user.save();
 
-        return res.status(204);
+        res.status(204).end();
     } catch (error) {
         console.error(error.message);
     }
