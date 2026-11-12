@@ -388,6 +388,38 @@
       "response": []
     },
     {
+      "name": "Verifying session token",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n\n});\n\npm.test(\"returns correct username\", () => {\n    const data = pm.response.json();\n\n    pm.expect(data).to.have.property(\"username\", \"newAcc\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://testing-backend-mongo-music-journal.onrender.com/auth/me",
+          "protocol": "https",
+          "host": [
+            "testing-backend-mongo-music-journal",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
       "name": "User favorites song",
       "event": [
         {
