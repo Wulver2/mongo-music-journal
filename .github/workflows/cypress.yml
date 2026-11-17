@@ -11,8 +11,8 @@ jobs:
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        working-directory: ./client/music_journal
         uses: cypress-io/github-action@v7
         with:
+          working-directory: ./client/music_journal
           build: npm run build
           start: npm start
