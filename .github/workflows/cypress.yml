@@ -16,5 +16,6 @@ jobs:
           working-directory: ./client/music_journal
           build: npm run build
           start: npm run dev
+          wait-on: http://localhost:5173
         env:
           VITE_API_URL: https://testing-backend-mongo-music-journal.onrender.com
