@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
-import "dotenv/config";
 
 export function Login() {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ export function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userInfo = await axios.post(`${process.env.VITE_API_URL}/auth/login`, form);
+            const userInfo = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form);
             // later set user
             setUser(userInfo.data)
             navigate("/");
