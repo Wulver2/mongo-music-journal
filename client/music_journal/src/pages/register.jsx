@@ -28,7 +28,7 @@ export function Register() {
 
         try {
             if (comparePw(form.confirmPw)) {
-                const userInfo = await axios.post("http://localhost:5001/auth/register", form);
+                const userInfo = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, form);
 
                 setUser(userInfo.data);
                 setIsMatch(true)
