@@ -5,9 +5,16 @@ on: push
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+
+    env:
+      VITE_API_URL: https://testing-backend-mongo-music-journal.onrender.com
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+      - name: Check API environment variable
+        run: |
+          echo "API URL: $VITE_API_URL"
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
@@ -17,5 +24,3 @@ jobs:
           build: npm run build
           start: npm run dev
           wait-on: http://localhost:5173
-        env:
-          VITE_API_URL: https://testing-backend-mongo-music-journal.onrender.com
