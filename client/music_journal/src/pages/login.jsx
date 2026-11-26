@@ -17,7 +17,6 @@ export function Login() {
         try {
             console.log(`base login url: ${import.meta.env.VITE_API_URL}`);
             const userInfo = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, form);
-            // later set user
             setUser(userInfo.data)
             navigate("/");
         } catch (error) {

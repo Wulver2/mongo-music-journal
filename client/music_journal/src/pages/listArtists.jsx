@@ -30,7 +30,7 @@ export function Artists() {
     const favriteArtist = async(e, id) => {
         e.preventDefault()
         try {
-            await axios.post("http://localhost:5001/favorites/artist", {artistId: id, id: user.id});
+            await axios.post(`${import.meta.env.VITE_API_URL}/favorites/artist1`, {artistId: id, id: user.id});
         } catch (error) {
             console.error(error.message);
         }
